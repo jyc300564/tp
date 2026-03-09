@@ -49,38 +49,38 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
      *       </pre>
      * @param sentence cannot be null
-     * @param partWord cannot be null, cannot be empty, must be a single word
+     * @param substring cannot be null, cannot be empty, must be a single word
      */
-    public static boolean containsPartWordIgnoreCase(String value, String partWord) {
-        requireNonNull(value);
-        requireNonNull(partWord);
+    public static boolean containsPartWordIgnoreCase(String word, String substring) {
+        requireNonNull(word);
+        requireNonNull(substring);
 
-        String preppedValue = value.trim();
-        String preppedWord = partWord.trim();
-        checkArgument(preppedValue.split("\\s+").length == 1, "Value parameter should be an email");
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        String preppedWord = word.trim();
+        String preppedSubstring = substring.trim();
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        checkArgument(!preppedSubstring.isEmpty(), "Substring parameter cannot be empty");
+        checkArgument(preppedSubstring.split("\\s+").length == 1, "Substring parameter should be a single substring");
 
-        return preppedValue.contains(preppedWord);
+        return preppedWord.contains(preppedSubstring);
     }
 
     /**
      * Returns true if the {@code value} starts with {@code prefix}.
      *   Ignores cases.
-     * @param value cannot be null
+     * @param word cannot be null
      * @param prefix cannot be null, cannot be empty, must be a single prefix
      */
-    public static boolean startsWithString(String value, String prefix) {
-        requireNonNull(value);
+    public static boolean startsWithString(String word, String prefix) {
+        requireNonNull(word);
         requireNonNull(prefix);
 
-        String preppedValue = value.trim();
+        String preppedWord = word.trim();
         String preppedPrefix = prefix.trim();
-        checkArgument(preppedValue.split("\\s+").length == 1, "Value parameter should be a phone number");
+        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
         checkArgument(!preppedPrefix.isEmpty(), "Prefix parameter cannot be empty");
-        checkArgument(preppedPrefix.split("\\s+").length == 1, "Prefix parameter should be a number");
+        checkArgument(preppedPrefix.split("\\s+").length == 1, "Prefix parameter should be a single substring");
 
-        return preppedValue.startsWith(preppedPrefix);
+        return preppedWord.startsWith(preppedPrefix);
     }
 
     /**

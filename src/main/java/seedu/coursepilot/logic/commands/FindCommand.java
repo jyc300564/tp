@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import seedu.coursepilot.commons.util.ToStringBuilder;
 import seedu.coursepilot.logic.Messages;
 import seedu.coursepilot.model.Model;
-import seedu.coursepilot.model.person.NameContainsKeywordsPredicate;
 import seedu.coursepilot.model.person.Student;
 
 /**
