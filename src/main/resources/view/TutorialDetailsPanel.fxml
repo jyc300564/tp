@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="0.0">
-  <TableView fx:id="tutorialDetailsTable" columnResizePolicy="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" VBox.vgrow="ALWAYS">
+  <TableView fx:id="tutorialDetailsTable" VBox.vgrow="ALWAYS">
     <columns>
       <TableColumn fx:id="tutorialCodeColumn" text="Tutorials" />
       <TableColumn fx:id="dayColumn" text="Day" />

@@ -1,5 +1,6 @@
 package seedu.coursepilot.logic.commands;
 
+import static seedu.coursepilot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.coursepilot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.coursepilot.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.coursepilot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -27,13 +28,24 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_listTutorial_success() {
+        assertCommandSuccess(new ListCommand(ListCommand.ListTarget.TUTORIAL),
+                model, ListCommand.MESSAGE_SUCCESS_TUTORIAL, expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
+    public void execute_listStudentWithNoCurrentOperatingTutorial_throwsCommandException() {
+        assertCommandFailure(new ListCommand(ListCommand.ListTarget.STUDENT),
+                model, ListCommand.MESSAGE_NO_CURRENT_OPERATING_TUTORIAL);
+    }
+
+    @Test
+    public void execute_listStudentWithCurrentOperatingTutorial_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        model.setCurrentOperatingTutorial(model.getTutorialList().get(0));
+        expectedModel.setCurrentOperatingTutorial(expectedModel.getTutorialList().get(0));
+
+        assertCommandSuccess(new ListCommand(ListCommand.ListTarget.STUDENT),
+                model, ListCommand.MESSAGE_SUCCESS_STUDENT, expectedModel);
     }
 }

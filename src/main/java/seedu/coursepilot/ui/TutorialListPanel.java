@@ -24,6 +24,6 @@ public class TutorialListPanel extends UiPart<Region> {
      */
     public TutorialListPanel(ObservableList<Tutorial> tutorials) {
         super(FXML);
-        tutorialListView.setItems(tutorials);
+        this.tutorialListView.setItems(tutorials);
     }
 }
