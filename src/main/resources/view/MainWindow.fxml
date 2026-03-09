@@ -34,10 +34,10 @@
         </MenuBar>
 
         <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.25" styleClass="pane-with-border">
-          <VBox minWidth="180" prefWidth="220" styleClass="pane-with-border">
+          <VBox minWidth="150" maxWidth="300" prefWidth="200" styleClass="pane-with-border">
             <StackPane fx:id="tutorialListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
-          <VBox minWidth="340" prefWidth="640" styleClass="pane-with-border">
+          <VBox minWidth="400" prefWidth="640" styleClass="pane-with-border">
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
         </SplitPane>
