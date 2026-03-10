@@ -31,7 +31,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues", "friends")),
         };
     }
-    
+
     public static Student[] getSamplePersons2() {
         return new Student[] {
             new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
@@ -60,8 +60,7 @@ public class SampleDataUtil {
                 new Tutorial("CS2103T-W14", "Wednesday", "12:00-13:00", 15, List.of(getSamplePersons2())),
                 new Tutorial("CS2103T-W15", "Friday", "14:00-15:00", 10, List.of(getSamplePersons3()))
         );
-    } 
-
+    }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
