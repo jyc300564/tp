@@ -101,10 +101,10 @@ public class Tutorial {
 
         Tutorial otherTutorial = (Tutorial) other;
         return tutorialCode.equals(otherTutorial.tutorialCode)
-        && day.equals(otherTutorial.day)
-        && timeSlot.equals(otherTutorial.timeSlot)
-        && capacity == otherTutorial.capacity
-        && students.equals(otherTutorial.students);
+            && day.equals(otherTutorial.day)
+            && timeSlot.equals(otherTutorial.timeSlot)
+            && capacity == otherTutorial.capacity
+            && students.equals(otherTutorial.students);
     }
 
     /**

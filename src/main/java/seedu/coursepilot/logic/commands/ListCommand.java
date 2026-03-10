@@ -10,6 +10,9 @@ import seedu.coursepilot.model.Model;
  */
 public class ListCommand extends Command {
 
+    /**
+     * Specifies the target of the list command.
+     */
     public enum ListTarget {
         STUDENT,
         TUTORIAL
@@ -34,10 +37,22 @@ public class ListCommand extends Command {
 
     private final ListTarget listTarget;
 
+    /**
+     * Creates a {@code ListCommand} with the specified listing target.
+     *
+     * @param listTarget The type of entity to list (student or tutorial).
+     */
     public ListCommand(ListTarget listTarget) {
+        requireNonNull(listTarget);
         this.listTarget = listTarget;
     }
 
+    /**
+     * Executes the list command.
+     * Lists tutorials or filters students based on the current operating tutorial.
+     *
+     * @throws CommandException if no current operating tutorial is selected when listing students
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

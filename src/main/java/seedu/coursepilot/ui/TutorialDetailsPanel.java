@@ -8,9 +8,10 @@ import javafx.scene.layout.Region;
 import seedu.coursepilot.model.tutorial.Tutorial;
 
 /**
- * A UI component that displays details for all tutorials.
+ * A UI component that displays a table of tutorials and their details.
  */
 public class TutorialDetailsPanel extends UiPart<Region> {
+
     private static final String FXML = "TutorialDetailsPanel.fxml";
 
     @FXML
@@ -25,6 +26,11 @@ public class TutorialDetailsPanel extends UiPart<Region> {
     @FXML
     private TableColumn<Tutorial, Integer> capacityColumn;
 
+    /**
+     * Creates a {@code TutorialDetailsPanel} with the given list of tutorials.
+     *
+     * @param tutorials Observable list of tutorials to be displayed in the table.
+     */
     public TutorialDetailsPanel(ObservableList<Tutorial> tutorials) {
         super(FXML);
         dayColumn.setCellValueFactory(cellData ->
