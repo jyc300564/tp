@@ -71,4 +71,19 @@ public class ListCommand extends Command {
         );
         return new CommandResult(MESSAGE_SUCCESS_STUDENT);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ListCommand)) {
+            return false;
+        }
+
+        ListCommand otherCommand = (ListCommand) other;
+        return listTarget == otherCommand.listTarget;
+    }
+
 }

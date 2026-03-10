@@ -11,6 +11,7 @@ import static seedu.coursepilot.testutil.TypicalPersons.BOB;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import seedu.coursepilot.model.Model;
 import seedu.coursepilot.model.ReadOnlyAddressBook;
 import seedu.coursepilot.model.ReadOnlyUserPrefs;
 import seedu.coursepilot.model.person.Student;
+import seedu.coursepilot.model.tutorial.Tutorial;
 import seedu.coursepilot.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -167,6 +169,26 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Tutorial> getTutorialList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Tutorial> getCurrentOperatingTutorial() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCurrentOperatingTutorial(Tutorial tutorial) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public void clearCurrentOperatingTutorial() {
             throw new AssertionError("This method should not be called.");
         }
     }
