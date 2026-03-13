@@ -6,7 +6,11 @@ import java.util.Arrays;
 
 import seedu.coursepilot.logic.commands.FindCommand;
 import seedu.coursepilot.logic.parser.exceptions.ParseException;
+import seedu.coursepilot.model.person.EmailContainsKeywordsPredicate;
+import seedu.coursepilot.model.person.MatricNumberStartsWithKeywordsPredicate;
 import seedu.coursepilot.model.person.NameContainsKeywordsPredicate;
+import seedu.coursepilot.model.person.PhoneStartsWithKeywordsPredicate;
+import seedu.coursepilot.model.person.TutorialKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -27,7 +31,17 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        switch (nameKeywords[0]) {
+        case "/tutorial":
+            return new FindCommand(new TutorialKeywordPredicate(Arrays.asList(nameKeywords)));
+        case "/phone":
+            return new FindCommand(new PhoneStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
+        case "/email":
+            return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        case "/matric":
+            return new FindCommand(new MatricNumberStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
+        default:
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
     }
-
 }
