@@ -31,20 +31,25 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        switch (nameKeywords[0]) {
-        case "/phone":
-            return new FindCommand(new PhoneStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
-        case "/email":
-            return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        case "/matric":
-            return new FindCommand(new MatricNumberStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
-        default:
-            // Throws an exception if user tries any other unrecognized flags
-            if (nameKeywords[0].startsWith("/")) {
+        if (nameKeywords[0].startsWith("/")) {
+            FindCommand.Flag flag = FindCommand.Flag.fromString(nameKeywords[0]);
+            if (flag == null) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_FLAG, FindCommand.MESSAGE_USAGE_FLAG));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT_FLAG, FindCommand.MESSAGE_USAGE_FLAG));
             }
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            switch (flag) {
+            case PHONE:
+                return new FindCommand(new PhoneStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
+            case EMAIL:
+                return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            case MATRIC:
+                return new FindCommand(new MatricNumberStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
+            default:
+                // Default case only occurs if you added a flag into FindCommand.Flag but did not add the case here
+                throw new AssertionError("Unhandled flag: " + flag);
+            }
         }
+
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 }
