@@ -199,7 +199,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredTutorialList(Predicate<Tutorial>) {
+        public void updateFilteredTutorialList(Predicate<Tutorial> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
