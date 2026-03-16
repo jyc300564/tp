@@ -2,6 +2,7 @@ package seedu.coursepilot.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.coursepilot.commons.core.GuiSettings;
 import seedu.coursepilot.logic.commands.CommandResult;
@@ -39,6 +40,9 @@ public interface Logic {
 
     /** Returns the current operating tutorial, if any. */
     Tutorial getCurrentOperatingTutorial();
+
+    /** Returns the current operating tutorial, for JavaFX UI */
+    ObjectProperty<Tutorial> getCurrentOperatingTutorialProperty();
 
     /**
      * Returns the user prefs' address book file path.
