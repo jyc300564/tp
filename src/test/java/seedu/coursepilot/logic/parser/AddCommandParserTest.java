@@ -61,7 +61,8 @@ public class AddCommandParserTest {
         Student expectedStudentMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                " -student " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + MATRIC_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                " -student " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + MATRIC_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedStudentMultipleTags));
     }
 
@@ -88,9 +89,10 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                " -student " + validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + MATRIC_DESC_AMY
-                        + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MATRICNUMBER));
+                " -student " + validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
+                        + MATRIC_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_MATRICNUMBER));
 
         // invalid value followed by valid value
 
@@ -185,7 +187,8 @@ public class AddCommandParserTest {
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, " -student " + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_MATRIC_DESC,
+        assertParseFailure(parser, " -student " + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + INVALID_MATRIC_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
