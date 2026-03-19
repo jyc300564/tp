@@ -97,7 +97,7 @@ public class Tutorial {
      */
     public boolean removeStudent(Student student) {
         requireNonNull(student);
-        return students.removeIf(s -> s.isSamePerson(student));
+        return students.removeIf(s -> s.isSameStudent(student));
     }
     /**
      * Returns true if both students have the same tutorial code.
