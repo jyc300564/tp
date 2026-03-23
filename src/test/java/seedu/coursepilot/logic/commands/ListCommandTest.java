@@ -33,7 +33,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listStudentWithNoCurrentOperatingTutorial_throwsCommandException() {
+    public void execute_listStudentWithNoCurrentOperatingTutorial() {
         expectedModel.updateFilteredStudentList(
             student -> expectedModel.getCoursePilot().getTutorialList().stream()
                     .anyMatch(tut -> tut.hasStudent(student))
