@@ -11,6 +11,18 @@ import seedu.coursepilot.commons.util.ToStringBuilder;
  */
 public class CommandResult {
 
+    /**
+     * Represents the panel switch behaviour after a command is executed.
+     * {@code SHOW_STUDENT_LIST} switches the center panel to the student list.
+     * {@code SHOW_TUTORIAL_DETAILS} switches the center panel to the tutorial details.
+     * {@code NO_CHANGE} leaves the center panel as-is.
+     */
+    public enum PanelSwitch {
+        SHOW_STUDENT_LIST,
+        SHOW_TUTORIAL_DETAILS,
+        NO_CHANGE
+    }
+
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
@@ -19,13 +31,17 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Specifies whether a command triggers a panel switch */
+    private final PanelSwitch panelSwitch;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, PanelSwitch panelSwitch) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.panelSwitch = panelSwitch;
     }
 
     /**
@@ -33,7 +49,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, PanelSwitch.NO_CHANGE);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +62,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public PanelSwitch getPanelSwitch() {
+        return panelSwitch;
     }
 
     @Override
@@ -62,12 +82,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && panelSwitch == otherCommandResult.panelSwitch;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, panelSwitch);
     }
 
     @Override
@@ -76,6 +97,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("panelSwitch", panelSwitch)
                 .toString();
     }
 

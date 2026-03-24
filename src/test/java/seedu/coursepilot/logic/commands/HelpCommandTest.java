@@ -5,6 +5,7 @@ import static seedu.coursepilot.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.coursepilot.logic.commands.CommandResult.PanelSwitch;
 import seedu.coursepilot.model.Model;
 import seedu.coursepilot.model.ModelManager;
 
@@ -14,7 +15,8 @@ public class HelpCommandTest {
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        CommandResult expectedCommandResult = new CommandResult(
+                SHOWING_HELP_MESSAGE, true, false, PanelSwitch.NO_CHANGE);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

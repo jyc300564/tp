@@ -1,5 +1,6 @@
 package seedu.coursepilot.logic.commands;
 
+import seedu.coursepilot.logic.commands.CommandResult.PanelSwitch;
 import seedu.coursepilot.model.Model;
 
 /**
@@ -13,7 +14,8 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
+        return new CommandResult(
+                MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, PanelSwitch.NO_CHANGE);
     }
 
 }

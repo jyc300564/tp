@@ -188,16 +188,27 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleShowStudentList() {
+        setTutorialDetailsPanelVisible(false);
+        setStudentListPanelVisible(true);
+    }
+
+    @FXML
+    private void handleShowTutorialDetails() {
+        setStudentListPanelVisible(false);
+        setTutorialDetailsPanelVisible(true);
+    }
+
     public StudentListPanel getStudentListPanel() {
         return studentListPanel;
     }
 
-    private void updateCenterPanel(String commandText) {
-        String trimmedCommand = commandText.trim();
-        if (trimmedCommand.equals("list -tutorial")) {
+    private void updateCenterPanel(CommandResult commandResult) {
+        if (commandResult.getPanelSwitch() == CommandResult.PanelSwitch.SHOW_TUTORIAL_DETAILS) {
             setStudentListPanelVisible(false);
             setTutorialDetailsPanelVisible(true);
-        } else if (trimmedCommand.equals("list -student")) {
+        } else if (commandResult.getPanelSwitch() == CommandResult.PanelSwitch.SHOW_STUDENT_LIST) {
             setTutorialDetailsPanelVisible(false);
             setStudentListPanelVisible(true);
         }
@@ -222,7 +233,16 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            updateCenterPanel(commandText);
+            switch (commandResult.getPanelSwitch()) {
+            case SHOW_STUDENT_LIST:
+                handleShowStudentList();
+                break;
+            case SHOW_TUTORIAL_DETAILS:
+                handleShowTutorialDetails();
+                break;
+            default:
+                break;
+            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {

@@ -46,6 +46,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 return new FindCommand(new MatricNumberStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
             default:
                 // Default case only occurs if you added a flag into FindCommand.Flag but did not add the case here
+                // Otherwise, it should be impossible to reach here
                 throw new AssertionError("Unhandled flag: " + flag);
             }
         }
