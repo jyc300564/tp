@@ -4,20 +4,27 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.coursepilot.model.AddressBook;
-import seedu.coursepilot.model.ReadOnlyAddressBook;
-import seedu.coursepilot.model.person.Email;
-import seedu.coursepilot.model.person.MatricNumber;
-import seedu.coursepilot.model.person.Name;
-import seedu.coursepilot.model.person.Phone;
-import seedu.coursepilot.model.person.Student;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.coursepilot.model.CoursePilot;
+import seedu.coursepilot.model.ReadOnlyCoursePilot;
+import seedu.coursepilot.model.student.Email;
+import seedu.coursepilot.model.student.MatricNumber;
+import seedu.coursepilot.model.student.Name;
+import seedu.coursepilot.model.student.Phone;
+import seedu.coursepilot.model.student.Student;
 import seedu.coursepilot.model.tag.Tag;
+import seedu.coursepilot.model.tutorial.Capacity;
+import seedu.coursepilot.model.tutorial.Day;
+import seedu.coursepilot.model.tutorial.TimeSlot;
+import seedu.coursepilot.model.tutorial.Tutorial;
+import seedu.coursepilot.model.tutorial.TutorialCode;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code CoursePilot} with sample data.
  */
 public class SampleDataUtil {
-    public static Student[] getSamplePersons() {
+    public static Student[] getSampleStudents1() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new MatricNumber("A000000"),
@@ -25,12 +32,22 @@ public class SampleDataUtil {
             new Student(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new MatricNumber("A000001"),
                 getTagSet("colleagues", "friends")),
+        };
+    }
+
+    public static Student[] getSampleStudents2() {
+        return new Student[] {
             new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new MatricNumber("A000002"),
                 getTagSet("neighbours")),
             new Student(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new MatricNumber("A000003"),
                 getTagSet("family")),
+        };
+    }
+
+    public static Student[] getSampleStudents3() {
+        return new Student[] {
             new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new MatricNumber("A000004"),
                 getTagSet("classmates")),
@@ -40,10 +57,21 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Student sampleStudent : getSamplePersons()) {
-            sampleAb.addPerson(sampleStudent);
+    public static ObservableList<Tutorial> getSampleTutorials() {
+        return FXCollections.observableArrayList(
+                new Tutorial(new TutorialCode("CS2103T-W13"), new Day("Monday"),
+                        new TimeSlot("10:00-11:00"), new Capacity(20)),
+                new Tutorial(new TutorialCode("CS2103T-W14"), new Day("Wednesday"),
+                        new TimeSlot("12:00-13:00"), new Capacity(15)),
+                new Tutorial(new TutorialCode("CS2103T-W15"), new Day("Friday"),
+                        new TimeSlot("14:00-15:00"), new Capacity(10))
+        );
+    }
+
+    public static ReadOnlyCoursePilot getSampleCoursePilot() {
+        CoursePilot sampleAb = new CoursePilot();
+        for (Student sampleStudent : getSampleStudents1()) {
+            sampleAb.addStudent(sampleStudent);
         }
         return sampleAb;
     }

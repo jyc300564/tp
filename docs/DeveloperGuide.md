@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
@@ -100,7 +100,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `CoursePilotParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -111,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `CoursePilotParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `CoursePilotParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -122,12 +122,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the course pilot data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CoursePilot`, which `Student` references. This allows `CoursePilot` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -141,8 +141,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both course pilot data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `CoursePilotStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -159,37 +159,37 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedCoursePilot`. It extends `CoursePilot` with an undo/redo history, stored internally as an `coursePilotStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedCoursePilot#commit()` — Saves the current course pilot state in its history.
+* `VersionedCoursePilot#undo()` — Restores the previous course pilot state from its history.
+* `VersionedCoursePilot#redo()` — Restores a previously undone course pilot state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitCoursePilot()`, `Model#undoCoursePilot()` and `Model#redoCoursePilot()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedCoursePilot` will be initialized with the initial course pilot state, and the `currentStatePointer` pointing to that single course pilot state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the course pilot. The `delete` command calls `Model#commitCoursePilot()`, causing the modified state of the course pilot after the `delete 5` command executes to be saved in the `coursePilotStateList`, and the `currentStatePointer` is shifted to the newly inserted course pilot state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCoursePilot()`, causing another modified course pilot state to be saved into the `coursePilotStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCoursePilot()`, so the course pilot state will not be saved into the `coursePilotStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCoursePilot()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous course pilot state, and restores the course pilot to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial CoursePilot state, then there are no previous CoursePilot states to restore. The `undo` command uses `Model#canUndoCoursePilot()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -206,17 +206,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoCoursePilot()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the course pilot to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `coursePilotStateList.size() - 1`, pointing to the latest course pilot state, then there are no undone CoursePilot states to restore. The `redo` command uses `Model#canRedoCoursePilot()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the course pilot, such as `list`, will usually not call `Model#commitCoursePilot()`, `Model#undoCoursePilot()` or `Model#redoCoursePilot()`. Thus, the `coursePilotStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitCoursePilot()`. Since the `currentStatePointer` is not pointing at the end of the `coursePilotStateList`, all course pilot states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -228,7 +228,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire course pilot.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -278,50 +278,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | Role  | Feature                                                  | Benefit |
 |----------|-------|----------------------------------------------------------|---|
-| * * *    | Tutor | Ask for help when using the product                      | I can refer to instructions when I forget how to use the App |
-| * * *    | Tutor | Add a student to the address book                        | I can keep track of all my students in one place |
-| * * *    | Tutor | Delete a student from the address book                   | I can remove students who are no longer relevant |
-| * * *    | Tutor | List all student contacts                                | I can quickly view all students stored in the system |
-| * * *    | Tutor | Edit existing student records                            | I can keep student information accurate and up to date |
-| * * *    | Tutor | Find a student record                                    | I can quickly find a specific student's detail |
-| * * *    | Tutor | Clear all existing student record                        | I can reset the system when the data is no longer needed |
-| * * *    | Tutor | Exit the program                                         | I can safely close the application after use |
-| * * *    | Tutor | Archive the program data                                 | I do not have to repopulate all the data again |
-| * *      | Tutor | Check student contact details                            | I can contact students when needed |
-| * *      | Tutor | View a tutorial                                          | I can check the contents of the tutorial |
-| * * *    | Tutor | List all tutorials                                       | I can check all the tutorials offered |
+| * * *    | Tutor | Ask for help when using CoursePilot                      | I can refer to instructions when I forget how to use CoursePilot |
+| * * *    | Tutor | Add a student to CoursePilot                             | I can keep track of all my students in one place |
+| * * *    | Tutor | Delete a student from CoursePilot                        | I can remove students who are no longer relevant |
+| * * *    | Tutor | List all student records                                 | I can quickly view all students stored in CoursePilot |
+| * * *    | Tutor | Edit existing student record                             | I can keep student information accurate and up to date |
+| * * *    | Tutor | Find a student record                                    | I can quickly find a specific student's information |
+| * * *    | Tutor | Clear all existing student records                       | I can reset the system when the data is no longer needed |
+| * * *    | Tutor | Exit CoursePilot                                         | I can safely close the application after use |
+| * * *    | Tutor | Archive CoursePilot data                                 | I do not have to repopulate all my data again |
+| * * *    | Tutor | List all tutorial slots                                  | I can check all the tutorials I am in charge of |
+| * * *    | Tutor | List all tutorial slots detail                           | I can check all the details of the tutorials I am in charge of |
+| * * *    | Tutor | Select a tutorial slots                                  | I can choose a tutorial slot to operate on |
 | * * *    | Tutor | Assign students to certain tutorial slots                | I can organize students into the correct tutorials |
-| * * *    | Tutor | View which students are assigned to which tutorial slots | I can understand the distribution of students across tutorials |
-| * *      | Tutor | Assign tutorial slots to teach in                        | I can manage which tutorials I am responsible for |
-| * *      | Tutor | View which tutors are assigned to which tutorial slots   | I can know who is responsible for each tutorial |
-| * * *    | Tutor | Filter available tutorial slots                          | I can easily find tutorial slots that match my conditions |
+| * * *    | Tutor | Add a tutorial slot                                      | I can create a new tutorial slot with a code, time, day and capacity |
+| * * *    | Tutor | Delete a tutorial slot                                   | I can remove tutorial slots that are no longer needed |
 | * *      | Tutor | Edit tutorial slots                                      | I can update tutorial arrangements |
-| *        | Tutor | Add tutorial resources                                   | I can share useful materials with students |
-| *        | Tutor | Delete tutorial resources                                | I can remove outdated or unnecessary materials |
-| *        | Tutor | Edit tutorial resources                                  | I can replace or reupload outdated materials |
-| * *      | Tutor | Track tutorial of each student                           | I can monitor each student's tutorial participation |
+| * *      | Tutor | View which students are assigned to which tutorial slots | I can understand the distribution of students across tutorials |
+| * *      | Tutor | Mark student attendance                                  | I can record who attended each tutorial |
+| * *      | Tutor | Unmark student attendance                                | I can correct attendance records if mistakes occur |
+| * *      | Tutor | Track participation of each student                      | I can monitor student participation over time per tutorial slot |
+| * *      | Tutor | Filter available tutorial slots                          | I can easily find tutorial slots that match my conditions |
+| * *      | Tutor | Provide feedback to students                             | I can help students improve their learning |
+| * *      | Tutor | Add deadlines                                            | I can remind myself of important dates |
+| * *      | Tutor | Delete deadlines                                         | I can remove deadlines that are no longer relevant |
+| * *      | Tutor | Edit deadlines                                           | I can update deadlines if schedules change |
+| * *      | Tutor | Be reminded of deadlines                                 | I do not miss any important deadlines |
 | *        | Tutor | Add assessments                                          | I can manage student evaluations and grading components |
 | *        | Tutor | Delete assessments                                       | I can remove assessments that are no longer required |
 | *        | Tutor | Edit assessments                                         | I can update assessment details when necessary |
 | *        | Tutor | Grade assessments                                        | I can evaluate student performance |
 | *        | Tutor | Track assessments                                        | I can monitor students' assessments and results |
 | *        | Tutor | Comment on student's work                                | I can provide constructive feedback to improve their learning |
-| * * *    | Tutor | Mark student attendance                                  | I can record who attended each tutorial |
-| * *      | Tutor | Unmark student attendance                                | I can correct attendance records if mistakes occur |
-| * *      | Tutor | Edit student attendance                                  | I can update attendance records when needed |
-| * *      | Tutor | Track attendance                                         | I can monitor student participation over time |
+| *        | Tutor | Add tutorial resources                                   | I can share useful materials with students |
+| *        | Tutor | Delete tutorial resources                                | I can remove outdated or unnecessary materials |
+| *        | Tutor | Edit tutorial resources                                  | I can replace or reupload outdated materials |
 | *        | Tutor | Create groups                                            | I can organize students for collaborative activities |
 | *        | Tutor | Send student private message                             | I can communicate directly with a specific student |
 | *        | Tutor | Send student group message                               | I can communicate important information to multiple students at once |
-| * *      | Tutor | Provide feedback to students                             | I can help students improve their learning |
-| * *      | Tutor | Add deadlines                                            | I can remind myself of important dates |
-| * *      | Tutor | Delete deadlines                                         | I can remove deadlines that are no longer relevant |
-| * *      | Tutor | Edit deadlines                                           | I can update deadlines if schedules change |
-| * *      | Tutor | Be reminded of deadlines                                 | I do not miss any important deadlines |
 
 ### Use cases
 
 (For all use cases below, the **System** is `CoursePilot` and the **Actor** is the `tutor`, unless specified otherwise)
+
+**Use case: UC01 - Ask for help**
+**Use case: UC02 - Manage Student Records**
+How to add, delete, edit, find, list, clear, assign to tutorial
+**Use case: UC03 - Manage Tutorial Slots**
+How to add, delete, select, list tutorial slots and detail
+**Use case: UC04 - Manage Attendance**
+**Use case: UC05 - Manage Deadlines**
+**Use case: UC06 - Archive and Restore Data**
+**Use case: UC07 - Manage Assessments**
 
 **Use case: UC01 - Add a student**
 
@@ -528,22 +536,24 @@ timing, and students.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A tutor with above average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Data should be stored locally in a human-editable file format (e.g., JSON).
-5.  The application should not require a database management system (DBMS).
-6.  The application should not depend on any remote server.
-7.  The application should work without requiring an installer.
-8.  The application should be packaged into a single JAR file not exceeding 100MB.
+5.  CoursePilot should not require a database management system (DBMS).
+6.  CoursePilot should not depend on any remote server.
+7.  CoursePilot should work without requiring an installer.
+8.  CoursePilot should be packaged into a single JAR file not exceeding 100MB.
 9.  The GUI should work well for standard screen resolutions of 1920x1080 and higher at 100% and 125% scaling, and should be usable at 1280x720 and higher at 150% scaling.
-10. The application should work on JDK 17.
-11. The application should follow an object-oriented design.
+10. CoursePilot should work on JDK 17.
+11. CoursePilot should follow an object-oriented design.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Tutor/TA**: A teaching assistant at a university responsible for conducting tutorial sessions, marking attendance, and grading assessments
-* **Tutorial group**: A group of students assigned to a specific tutorial session managed by a tutor
+* **Student Record**: A stored entry in CoursePilot containing a student's information
+* **Tutorial Slot**: A tutorial object defined by a code, time, day, and capacity, created and managed by a tutor in CoursePilot
+* **Tutorial Resource**: A local file (e.g. PDF) detected by CoursePilot from the tutor's PC and imported into CoursePilot for easy access
 * **Assessment**: A graded component of a course such as an assignment, quiz, or exam
 * **Attendance**: A record of whether a student was present for a specific tutorial session
-* **CLI**: Command Line Interface, a text-based interface for interacting with the application
+* **CLI**: Command Line Interface, a text-based interface for interacting with CoursePilot
 
 --------------------------------------------------------------------------------------------------------------------
 

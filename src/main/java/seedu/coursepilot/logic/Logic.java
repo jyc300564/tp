@@ -1,14 +1,17 @@
 package seedu.coursepilot.logic;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.coursepilot.commons.core.GuiSettings;
 import seedu.coursepilot.logic.commands.CommandResult;
 import seedu.coursepilot.logic.commands.exceptions.CommandException;
 import seedu.coursepilot.logic.parser.exceptions.ParseException;
-import seedu.coursepilot.model.ReadOnlyAddressBook;
-import seedu.coursepilot.model.person.Student;
+import seedu.coursepilot.model.ReadOnlyCoursePilot;
+import seedu.coursepilot.model.student.Student;
+import seedu.coursepilot.model.tutorial.Tutorial;
 
 /**
  * API of the Logic component
@@ -24,19 +27,28 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the CoursePilot.
      *
-     * @see seedu.coursepilot.model.Model#getAddressBook()
+     * @see seedu.coursepilot.model.Model#getCoursePilot()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyCoursePilot getCoursePilot();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Student> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of students */
+    ObservableList<Student> getFilteredStudentList();
+
+    /** Returns an unmodifiable view of the tutorial list. */
+    ObservableList<Tutorial> getFilteredTutorialList();
+
+    /** Returns the current operating tutorial, if any. */
+    Optional<Tutorial> getCurrentOperatingTutorial();
+
+    /** Returns the current operating tutorial, for JavaFX UI */
+    ObjectProperty<Tutorial> getCurrentOperatingTutorialProperty();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' course pilot file path.
      */
-    Path getAddressBookFilePath();
+    Path getCoursePilotFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -4,40 +4,50 @@ import static java.util.Objects.requireNonNull;
 import static seedu.coursepilot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.coursepilot.commons.core.GuiSettings;
 import seedu.coursepilot.commons.core.LogsCenter;
-import seedu.coursepilot.model.person.Student;
+import seedu.coursepilot.model.student.Student;
+import seedu.coursepilot.model.tutorial.Tutorial;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the course pilot data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final CoursePilot coursePilot;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Tutorial> filteredTutorials;
+    private final ObjectProperty<Tutorial> currentOperatingTutorial = new SimpleObjectProperty<>();
+
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given coursePilot and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyCoursePilot coursePilot, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(coursePilot, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with course pilot: " + coursePilot + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.coursePilot = new CoursePilot(coursePilot);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredStudents = new FilteredList<>(this.coursePilot.getStudentList());
+        this.filteredTutorials = new FilteredList<>(this.coursePilot.getTutorialList());
+
+        currentOperatingTutorial.setValue(null);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new CoursePilot(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,67 +75,124 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getCoursePilotFilePath() {
+        return userPrefs.getCoursePilotFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setCoursePilotFilePath(Path coursePilotFilePath) {
+        requireNonNull(coursePilotFilePath);
+        userPrefs.setCoursePilotFilePath(coursePilotFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== CoursePilot ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setCoursePilot(ReadOnlyCoursePilot coursePilot) {
+        this.coursePilot.resetData(coursePilot);
     }
 
     @Override
-    public boolean hasPerson(Student student) {
+    public ReadOnlyCoursePilot getCoursePilot() {
+        return coursePilot;
+    }
+
+    @Override
+    public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasPerson(student);
+        return coursePilot.hasStudent(student);
+    }
+    @Override
+    public boolean hasTutorial(Tutorial tutorial) {
+        requireNonNull(tutorial);
+        return coursePilot.hasTutorial(tutorial);
     }
 
     @Override
-    public void deletePerson(Student target) {
-        addressBook.removePerson(target);
+    public void deleteStudent(Student target) {
+        coursePilot.removeStudent(target);
     }
 
     @Override
-    public void addPerson(Student student) {
-        addressBook.addPerson(student);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteTutorial(Tutorial tutorial) {
+        coursePilot.removeTutorial(tutorial);
     }
 
     @Override
-    public void setPerson(Student target, Student editedStudent) {
+    public void addStudent(Student student) {
+        coursePilot.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public void addTutorial(Tutorial tutorial) {
+        coursePilot.addTutorial(tutorial);
+        updateFilteredTutorialList(PREDICATE_SHOW_ALL_TUTORIALS);
+    }
+
+
+    @Override
+    public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
-        addressBook.setPerson(target, editedStudent);
+        coursePilot.setStudent(target, editedStudent);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setTutorial(Tutorial target, Tutorial editedTutorial) {
+        requireAllNonNull(target, editedTutorial);
+        coursePilot.setTutorial(target, editedTutorial);
+    }
+
+    //=========== CoursePilot ================================================================================
+
+    @Override
+    public Optional<Tutorial> getCurrentOperatingTutorial() {
+        return Optional.ofNullable(currentOperatingTutorial.get());
+    }
+
+    @Override
+    public ObjectProperty<Tutorial> getCurrentOperatingTutorialProperty() {
+        return currentOperatingTutorial;
+    }
+
+    public void setCurrentOperatingTutorial(Tutorial tutorial) {
+        requireNonNull(tutorial);
+        currentOperatingTutorial.set(tutorial);
+    }
+
+    @Override
+    public void clearCurrentOperatingTutorial() {
+        currentOperatingTutorial.setValue(null);
+    }
+
+
+    //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * {@code versionedCoursePilot}
      */
     @Override
-    public ObservableList<Student> getFilteredPersonList() {
+    public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Student> predicate) {
+    public ObservableList<Tutorial> getFilteredTutorialList() {
+        return filteredTutorials;
+    }
+
+    @Override
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTutorialList(Predicate<Tutorial> predicate) {
+        requireNonNull(predicate);
+        filteredTutorials.setPredicate(predicate);
     }
 
     @Override
@@ -140,9 +207,11 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return coursePilot.equals(otherModelManager.coursePilot)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents);
+                && filteredStudents.equals(otherModelManager.filteredStudents)
+                && filteredTutorials.equals(otherModelManager.filteredTutorials)
+                && Optional.ofNullable(currentOperatingTutorial.get())
+                    .equals(Optional.ofNullable(otherModelManager.currentOperatingTutorial.get()));
     }
-
 }
