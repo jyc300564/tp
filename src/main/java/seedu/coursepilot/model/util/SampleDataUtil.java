@@ -14,7 +14,11 @@ import seedu.coursepilot.model.student.Name;
 import seedu.coursepilot.model.student.Phone;
 import seedu.coursepilot.model.student.Student;
 import seedu.coursepilot.model.tag.Tag;
+import seedu.coursepilot.model.tutorial.Capacity;
+import seedu.coursepilot.model.tutorial.Day;
+import seedu.coursepilot.model.tutorial.TimeSlot;
 import seedu.coursepilot.model.tutorial.Tutorial;
+import seedu.coursepilot.model.tutorial.TutorialCode;
 
 /**
  * Contains utility methods for populating {@code CoursePilot} with sample data.
@@ -55,9 +59,12 @@ public class SampleDataUtil {
 
     public static ObservableList<Tutorial> getSampleTutorials() {
         return FXCollections.observableArrayList(
-                new Tutorial("CS2103T-W13", "Monday", "10:00-11:00", 20),
-                new Tutorial("CS2103T-W14", "Wednesday", "12:00-13:00", 15),
-                new Tutorial("CS2103T-W15", "Friday", "14:00-15:00", 10)
+                new Tutorial(new TutorialCode("CS2103T-W13"), new Day("Monday"),
+                        new TimeSlot("10:00-11:00"), new Capacity(20)),
+                new Tutorial(new TutorialCode("CS2103T-W14"), new Day("Wednesday"),
+                        new TimeSlot("12:00-13:00"), new Capacity(15)),
+                new Tutorial(new TutorialCode("CS2103T-W15"), new Day("Friday"),
+                        new TimeSlot("14:00-15:00"), new Capacity(10))
         );
     }
 

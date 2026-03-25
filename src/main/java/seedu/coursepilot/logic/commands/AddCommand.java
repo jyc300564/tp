@@ -59,6 +59,8 @@ public class AddCommand extends Command {
             "This tutorial already exists in the system";
     public static final String MESSAGE_NO_CURRENT_OPERATING_TUTORIAL =
             "No current operating tutorial selected. Use find first.";
+    public static final String MESSAGE_TUTORIAL_FULL =
+            "Cannot add student: Tutorial is at full capacity";
 
     private final Student toAdd;
     private final Tutorial tutorialToAdd;
@@ -110,8 +112,12 @@ public class AddCommand extends Command {
             }
 
             if (!currentOperatingTutorial.hasStudent(toAdd)) {
-                currentOperatingTutorial.addStudent(toAdd);
-                return new CommandResult(String.format(MESSAGE_SUCCESS_STUDENT, Messages.format(toAdd)));
+                try {
+                    currentOperatingTutorial.addStudent(toAdd);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS_STUDENT, Messages.format(toAdd)));
+                } catch (IllegalStateException e) {
+                    throw new CommandException(MESSAGE_TUTORIAL_FULL);
+                }
             }
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }

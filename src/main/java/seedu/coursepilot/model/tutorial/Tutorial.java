@@ -1,6 +1,7 @@
 package seedu.coursepilot.model.tutorial;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.coursepilot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,25 +12,26 @@ import seedu.coursepilot.model.student.Student;
 /**
  * Represents a tutorial in CoursePilot.
  * A tutorial has a code, scheduled day, time slot, a maximum capacity.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Tutorial {
-    private final String tutorialCode;
-    private final String day;
-    private final String timeSlot;
-    private final int capacity;
+    private final TutorialCode tutorialCode;
+    private final Day day;
+    private final TimeSlot timeSlot;
+    private final Capacity capacity;
     private final List<Student> students = new ArrayList<>();
+
     /**
      * Constructs a {@code Tutorial}.
      *
      * @param tutorialCode unique code identifying the tutorial
      * @param day the day the tutorial is held
      * @param timeSlot the time slot of the tutorial
+     * @param capacity the maximum capacity of the tutorial
      */
     public Tutorial(
-        String tutorialCode, String day, String timeSlot, int capacity) {
-        requireNonNull(tutorialCode);
-        requireNonNull(day);
-        requireNonNull(timeSlot);
+        TutorialCode tutorialCode, Day day, TimeSlot timeSlot, Capacity capacity) {
+        requireAllNonNull(tutorialCode, day, timeSlot, capacity);
 
         this.tutorialCode = tutorialCode;
         this.day = day;
@@ -41,28 +43,28 @@ public class Tutorial {
      * Returns the tutorial code.
      */
     public String getTutorialCode() {
-        return tutorialCode;
+        return tutorialCode.value;
     }
 
     /**
      * Returns the day the tutorial takes place.
      */
     public String getDay() {
-        return day;
+        return day.value;
     }
 
     /**
      * Returns the time slot of the tutorial.
      */
     public String getTimeSlot() {
-        return timeSlot;
+        return timeSlot.value;
     }
 
     /**
      * Returns the maximum capacity of the tutorial.
      */
     public int getCapacity() {
-        return capacity;
+        return capacity.value;
     }
 
     /**
@@ -83,8 +85,13 @@ public class Tutorial {
      * Adds a student to the studentList belonging to this particular tutorial instance
      *
      * @param student the student to be added
+     * @throws IllegalStateException if the tutorial is at full capacity
      */
     public void addStudent(Student student) {
+        requireNonNull(student);
+        if (isFull()) {
+            throw new IllegalStateException("Tutorial is at full capacity");
+        }
         this.students.add(student);
     }
 
@@ -99,6 +106,13 @@ public class Tutorial {
         requireNonNull(student);
         return students.removeIf(s -> s.isSameStudent(student));
     }
+    /**
+     * Returns true if the tutorial is at full capacity.
+     */
+    public boolean isFull() {
+        return students.size() >= capacity.value;
+    }
+
     /**
      * Returns true if both students have the same tutorial code.
      * This defines a weaker notion of equality between two tutorials.
@@ -127,7 +141,7 @@ public class Tutorial {
         return tutorialCode.equals(otherTutorial.tutorialCode)
             && day.equals(otherTutorial.day)
             && timeSlot.equals(otherTutorial.timeSlot)
-            && capacity == otherTutorial.capacity;
+            && capacity.equals(otherTutorial.capacity);
     }
 
     /**

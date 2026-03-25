@@ -22,7 +22,11 @@ import seedu.coursepilot.model.student.Name;
 import seedu.coursepilot.model.student.Phone;
 import seedu.coursepilot.model.student.Student;
 import seedu.coursepilot.model.tag.Tag;
+import seedu.coursepilot.model.tutorial.Capacity;
+import seedu.coursepilot.model.tutorial.Day;
+import seedu.coursepilot.model.tutorial.TimeSlot;
 import seedu.coursepilot.model.tutorial.Tutorial;
+import seedu.coursepilot.model.tutorial.TutorialCode;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -75,10 +79,19 @@ public class AddCommandParser implements Parser<AddCommand> {
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
-            String tutorialCode = argMultimap.getValue(PREFIX_TUTORIALCODE).get();
-            String day = argMultimap.getValue(PREFIX_DAY).get();
-            String timeslot = argMultimap.getValue(PREFIX_TIMESLOT).get();
-            int capacity = Integer.parseInt(argMultimap.getValue(PREFIX_CAPACITY).get());
+
+            TutorialCode tutorialCode = new TutorialCode(argMultimap.getValue(PREFIX_TUTORIALCODE).get());
+            Day day = new Day(argMultimap.getValue(PREFIX_DAY).get());
+            TimeSlot timeslot = new TimeSlot(argMultimap.getValue(PREFIX_TIMESLOT).get());
+
+            int capacityValue;
+            try {
+                capacityValue = Integer.parseInt(argMultimap.getValue(PREFIX_CAPACITY).get());
+            } catch (NumberFormatException e) {
+                throw new ParseException("Capacity must be a valid integer");
+            }
+
+            Capacity capacity = new Capacity(capacityValue);
 
             Tutorial tutorial = new Tutorial(tutorialCode, day, timeslot, capacity);
             return new AddCommand(tutorial);

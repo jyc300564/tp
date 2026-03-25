@@ -26,7 +26,11 @@ import seedu.coursepilot.model.Model;
 import seedu.coursepilot.model.ReadOnlyCoursePilot;
 import seedu.coursepilot.model.ReadOnlyUserPrefs;
 import seedu.coursepilot.model.student.Student;
+import seedu.coursepilot.model.tutorial.Capacity;
+import seedu.coursepilot.model.tutorial.Day;
+import seedu.coursepilot.model.tutorial.TimeSlot;
 import seedu.coursepilot.model.tutorial.Tutorial;
+import seedu.coursepilot.model.tutorial.TutorialCode;
 import seedu.coursepilot.testutil.StudentBuilder;
 
 public class AddCommandTest {
@@ -40,7 +44,8 @@ public class AddCommandTest {
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
-        Tutorial tutorial = new Tutorial("T01", "Mon", "1-2pm", 20);
+        Tutorial tutorial = new Tutorial(new TutorialCode("T01"), new Day("Mon"),
+                new TimeSlot("1-2pm"), new Capacity(20));
         modelStub.setCurrentOperatingTutorial(tutorial);
 
         CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
@@ -55,7 +60,8 @@ public class AddCommandTest {
         Student validStudent = new StudentBuilder().build();
         AddCommand addCommand = new AddCommand(validStudent);
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
-        Tutorial tutorial = new Tutorial("T01", "Mon", "1-2pm", 20);
+        Tutorial tutorial = new Tutorial(new TutorialCode("T01"), new Day("Mon"),
+                new TimeSlot("1-2pm"), new Capacity(20));
         tutorial.addStudent(validStudent);
         modelStub.setCurrentOperatingTutorial(tutorial);
 
@@ -69,7 +75,8 @@ public class AddCommandTest {
                 .withMatriculationNumber(ALICE.getMatriculationNumber().matricNumber).build();
         AddCommand addCommand = new AddCommand(bobWithAliceMatric);
         ModelStubWithStudent modelStub = new ModelStubWithStudent(alice);
-        Tutorial tutorial = new Tutorial("T01", "Mon", "1-2pm", 20);
+        Tutorial tutorial = new Tutorial(new TutorialCode("T01"), new Day("Mon"),
+                new TimeSlot("1-2pm"), new Capacity(20));
         tutorial.addStudent(alice);
         modelStub.setCurrentOperatingTutorial(tutorial);
 

@@ -17,7 +17,11 @@ import seedu.coursepilot.model.Model;
 import seedu.coursepilot.model.ModelManager;
 import seedu.coursepilot.model.UserPrefs;
 import seedu.coursepilot.model.student.Student;
+import seedu.coursepilot.model.tutorial.Capacity;
+import seedu.coursepilot.model.tutorial.Day;
+import seedu.coursepilot.model.tutorial.TimeSlot;
 import seedu.coursepilot.model.tutorial.Tutorial;
+import seedu.coursepilot.model.tutorial.TutorialCode;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -72,7 +76,8 @@ public class DeleteCommandTest {
         Student studentToDelete = tutorial1.getStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // Create second tutorial and add the same student
-        Tutorial tutorial2 = new Tutorial("CS2103T-T01", "Thu", "2pm-3pm", 10);
+        Tutorial tutorial2 = new Tutorial(new TutorialCode("CS2103T-T01"), new Day("Thu"),
+                new TimeSlot("2pm-3pm"), new Capacity(10));
         tutorial2.addStudent(studentToDelete);
         model.addTutorial(tutorial2);
 

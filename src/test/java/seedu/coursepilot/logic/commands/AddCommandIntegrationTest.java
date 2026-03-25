@@ -12,7 +12,11 @@ import seedu.coursepilot.model.Model;
 import seedu.coursepilot.model.ModelManager;
 import seedu.coursepilot.model.UserPrefs;
 import seedu.coursepilot.model.student.Student;
+import seedu.coursepilot.model.tutorial.Capacity;
+import seedu.coursepilot.model.tutorial.Day;
+import seedu.coursepilot.model.tutorial.TimeSlot;
 import seedu.coursepilot.model.tutorial.Tutorial;
+import seedu.coursepilot.model.tutorial.TutorialCode;
 import seedu.coursepilot.testutil.StudentBuilder;
 
 /**
@@ -26,7 +30,8 @@ public class AddCommandIntegrationTest {
     public void setUp() {
         model = new ModelManager(getTypicalCoursePilot(), new UserPrefs());
         if (model.getFilteredTutorialList().isEmpty()) {
-            Tutorial currentTutorial = new Tutorial("CS2103T-W13", "Wed", "1pm-2pm", 10);
+            Tutorial currentTutorial = new Tutorial(new TutorialCode("CS2103T-W13"), new Day("Wed"),
+                    new TimeSlot("1pm-2pm"), new Capacity(10));
             model.addTutorial(currentTutorial);
             model.setCurrentOperatingTutorial(currentTutorial);
         } else {

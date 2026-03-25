@@ -17,7 +17,11 @@ import java.util.List;
 
 import seedu.coursepilot.model.CoursePilot;
 import seedu.coursepilot.model.student.Student;
+import seedu.coursepilot.model.tutorial.Capacity;
+import seedu.coursepilot.model.tutorial.Day;
+import seedu.coursepilot.model.tutorial.TimeSlot;
 import seedu.coursepilot.model.tutorial.Tutorial;
+import seedu.coursepilot.model.tutorial.TutorialCode;
 
 /**
  * A utility class containing a list of {@code Student} objects to be used in tests.
@@ -68,7 +72,8 @@ public class TypicalStudents {
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);
         }
-        Tutorial tutorial = new Tutorial("CS2103T-W13", "Wed", "1pm-2pm", 10);
+        Tutorial tutorial = new Tutorial(new TutorialCode("CS2103T-W13"), new Day("Wed"),
+                new TimeSlot("1pm-2pm"), new Capacity(10));
         for (Student student : getTypicalStudents()) {
             tutorial.addStudent(student);
         }

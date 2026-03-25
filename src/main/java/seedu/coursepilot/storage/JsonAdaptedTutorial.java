@@ -9,7 +9,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.coursepilot.commons.exceptions.IllegalValueException;
 import seedu.coursepilot.model.student.Student;
+import seedu.coursepilot.model.tutorial.Capacity;
+import seedu.coursepilot.model.tutorial.Day;
+import seedu.coursepilot.model.tutorial.TimeSlot;
 import seedu.coursepilot.model.tutorial.Tutorial;
+import seedu.coursepilot.model.tutorial.TutorialCode;
 
 /**
  * Jackson-friendly version of {@link Tutorial}.
@@ -63,21 +67,38 @@ class JsonAdaptedTutorial {
         if (tutorialCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutorialCode"));
         }
+        if (!TutorialCode.isValidTutorialCode(tutorialCode)) {
+            throw new IllegalValueException(TutorialCode.MESSAGE_CONSTRAINTS);
+        }
+        final TutorialCode modelTutorialCode = new TutorialCode(tutorialCode);
 
         if (day == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "day"));
         }
+        if (!Day.isValidDay(day)) {
+            throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
+        }
+        final Day modelDay = new Day(day);
 
         if (timeSlot == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "timeSlot"));
         }
+        if (!TimeSlot.isValidTimeSlot(timeSlot)) {
+            throw new IllegalValueException(TimeSlot.MESSAGE_CONSTRAINTS);
+        }
+        final TimeSlot modelTimeSlot = new TimeSlot(timeSlot);
+
+        if (!Capacity.isValidCapacity(capacity)) {
+            throw new IllegalValueException(Capacity.MESSAGE_CONSTRAINTS);
+        }
+        final Capacity modelCapacity = new Capacity(capacity);
 
         List<Student> modelStudents = new ArrayList<>();
         for (JsonAdaptedStudent jsonStudent : students) {
             modelStudents.add(jsonStudent.toModelType());
         }
 
-        Tutorial tutorial = new Tutorial(tutorialCode, day, timeSlot, capacity);
+        Tutorial tutorial = new Tutorial(modelTutorialCode, modelDay, modelTimeSlot, modelCapacity);
 
         for (Student student : modelStudents) {
             tutorial.addStudent(student);
