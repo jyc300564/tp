@@ -72,7 +72,7 @@ public class CommandBox extends UiPart<Region> {
         suggestionListView.setMouseTransparent(false);
 
         suggestionListView.prefWidthProperty().bind(commandTextField.widthProperty());
-        
+
         suggestionPopup.getContent().add(suggestionListView);
         suggestionPopup.setAutoHide(true);
     }
@@ -95,7 +95,7 @@ public class CommandBox extends UiPart<Region> {
 
         switch (event.getCode()) {
         case DOWN:
-            int nextIndex = (suggestionListView.getSelectionModel().getSelectedIndex() + 1) 
+            int nextIndex = (suggestionListView.getSelectionModel().getSelectedIndex() + 1)
                     % suggestionListView.getItems().size();
             suggestionListView.getSelectionModel().select(nextIndex);
             event.consume();
@@ -142,7 +142,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         suggestionListView.setItems(items);
-        
+
         suggestionListView.getSelectionModel().selectFirst();
 
         double height = Math.min(items.size() * LIST_CELL_HEIGHT + 2, 200);
@@ -173,7 +173,7 @@ public class CommandBox extends UiPart<Region> {
 
         String text = commandTextField.getText();
         String[] parts = text.stripLeading().split("\\s+");
-        
+
         String newText;
         if (!text.contains(" ")) {
             newText = suggestion + " ";
