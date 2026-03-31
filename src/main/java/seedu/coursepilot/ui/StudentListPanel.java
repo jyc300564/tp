@@ -33,24 +33,6 @@ public class StudentListPanel extends UiPart<Region> {
         studentListView.setItems(studentList);
         studentListView.setCellFactory(listView -> new StudentListViewCell());
         studentListView.setSelectionModel(new NoOpListSelectionModel<>());
-
-        tutorialList.addListener((ListChangeListener<Tutorial>) change -> {
-            studentListView.refresh();
-        });
-
-        tutorialList.forEach(tutorial ->
-                tutorial.getStudents().addListener((ListChangeListener<Student>) change ->
-                        studentListView.refresh()));
-
-        tutorialList.addListener((ListChangeListener<Tutorial>) change -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    change.getAddedSubList().forEach(tutorial ->
-                            tutorial.getStudents().addListener((ListChangeListener<Student>) c ->
-                                    studentListView.refresh()));
-                }
-            }
-        });
     }
 
     /**
@@ -70,4 +52,10 @@ public class StudentListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Refreshes the student list panel to reflect any changes in tutorial membership.
+     */
+    public void refresh() {
+        studentListView.refresh();
+    }
 }
