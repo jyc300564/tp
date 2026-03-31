@@ -33,13 +33,33 @@ public class NoOpTableSelectionModel<T> extends TableViewSelectionModel<T> {
     }
 
     @Override
+    public boolean isSelected(int index) {
+        return false;
+    }
+
+    @Override
     public void select(int row, TableColumn<T, ?> column) {}
+
+    @Override
+    public void select(int index) {}
+
+    @Override
+    public void select(T obj) {}
 
     @Override
     public void clearAndSelect(int row, TableColumn<T, ?> column) {}
 
     @Override
+    public void clearAndSelect(int index) {}
+
+    @Override
     public void clearSelection(int row, TableColumn<T, ?> column) {}
+
+    @Override
+    public void clearSelection(int index) {}
+
+    @Override
+    public void clearSelection() {}
 
     @Override
     public void selectLeftCell() {}
@@ -74,26 +94,6 @@ public class NoOpTableSelectionModel<T> extends TableViewSelectionModel<T> {
 
     @Override
     public void selectLast() {}
-
-    @Override
-    public void clearAndSelect(int index) {}
-
-    @Override
-    public void select(int index) {}
-
-    @Override
-    public void select(T obj) {}
-
-    @Override
-    public void clearSelection(int index) {}
-
-    @Override
-    public void clearSelection() {}
-
-    @Override
-    public boolean isSelected(int index) {
-        return false;
-    }
 
     @Override
     public boolean isEmpty() {

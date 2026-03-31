@@ -2,7 +2,6 @@ package seedu.coursepilot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.coursepilot.logic.commands.CommandResult.PanelSwitch;
 import seedu.coursepilot.model.Model;
 
 /**
