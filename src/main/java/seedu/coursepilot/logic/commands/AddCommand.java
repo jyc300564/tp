@@ -124,6 +124,9 @@ public class AddCommand extends Command {
             if (!currentOperatingTutorial.hasStudent(toAdd)) {
                 try {
                     currentOperatingTutorial.addStudent(toAdd);
+                    model.updateFilteredStudentList(
+                            student -> model.getCurrentOperatingTutorial().get().hasStudent(student)
+                    );
                     return new CommandResult(String.format(MESSAGE_SUCCESS_STUDENT, Messages.format(toAdd)));
                 } catch (IllegalStateException e) {
                     throw new CommandException(MESSAGE_TUTORIAL_FULL);
