@@ -46,7 +46,7 @@ public class SelectCommand extends Command {
             return new CommandResult(MESSAGE_CLEAR_TUTORIAL);
         }
 
-        Tutorial tutorial = model.getTutorialByCode(tutorialKeyword).get();
+        Tutorial tutorial = model.getTutorialByCode(tutorialKeyword).orElse(null);
 
         if (tutorial == null) {
             return new CommandResult(
