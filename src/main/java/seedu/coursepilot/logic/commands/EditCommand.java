@@ -113,7 +113,13 @@ public class EditCommand extends Command {
         String newMatric = editedStudent.getMatriculationNumber().toString();
         model.getFilteredTutorialList().forEach(t -> t.editStudent(newMatric, editedStudent));
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        if (model.getCurrentOperatingTutorial().isEmpty()) {
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        } else {
+            model.updateFilteredStudentList(
+                    student -> model.getCurrentOperatingTutorial().get().hasStudent(student)
+            );
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
     }
 
