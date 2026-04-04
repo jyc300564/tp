@@ -58,7 +58,7 @@ public class TutorialCode {
         }
 
         TutorialCode otherCode = (TutorialCode) other;
-        return value.equals(otherCode.value);
+        return value.toLowerCase().equals(otherCode.value.toLowerCase());
     }
 
     @Override
