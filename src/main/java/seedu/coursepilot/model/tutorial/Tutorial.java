@@ -99,8 +99,8 @@ public class Tutorial {
      * Edits a student from this tutorial's student list.
      * The student must exist in the tutorial.
      *
-     * @param old matric number of the student to be edited
-     * @param student the student to be removed
+     * @param matric the old matric number of the student to be edited
+     * @param editedStudent the student to be removed
      * @return true if the student was removed, false if not found
      */
     public void editStudent(String matric, Student editedStudent) {
