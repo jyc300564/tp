@@ -1,6 +1,7 @@
 package seedu.coursepilot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.coursepilot.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -103,7 +104,13 @@ public class DeleteCommand extends Command {
                     model.deleteStudent(student);
                 }
             }
-
+            String deletedCode = tutorialToDelete.getTutorialCode().toString();
+            Optional<Tutorial> currentTutorialOpt = model.getCurrentOperatingTutorial();
+            if (!currentTutorialOpt.isEmpty()
+                    && currentTutorialOpt.get().getTutorialCode().toString().equals(deletedCode)) {
+                model.clearCurrentOperatingTutorial();
+                model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            }
             model.deleteTutorial(tutorialToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_TUTORIAL_SUCCESS, Messages.format(tutorialToDelete)));
         }
