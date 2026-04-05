@@ -60,7 +60,7 @@ public class AddCommand extends Command {
             "Another student with the same phone number or email"
             + " already exists in CoursePilot.";
     public static final String MESSAGE_DUPLICATE_TUTORIAL =
-            "This tutorial already exists in CoursePilot";
+            "This tutorial code already exists in CoursePilot";
     public static final String MESSAGE_NO_CURRENT_OPERATING_TUTORIAL =
             "No tutorial selected. Please select a tutorial to operate on first.";
     public static final String MESSAGE_TUTORIAL_FULL =
@@ -125,6 +125,9 @@ public class AddCommand extends Command {
             if (!currentOperatingTutorial.hasStudent(toAdd)) {
                 try {
                     currentOperatingTutorial.addStudent(toAdd);
+                    model.updateFilteredStudentList(
+                            student -> model.getCurrentOperatingTutorial().get().hasStudent(student)
+                    );
                     return new CommandResult(String.format(MESSAGE_SUCCESS_STUDENT, Messages.format(toAdd)));
                 } catch (IllegalStateException e) {
                     throw new CommandException(MESSAGE_TUTORIAL_FULL);
@@ -133,6 +136,9 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
         if (addTarget == AddTarget.TUTORIAL) {
+            if (model.hasTutorial(tutorialToAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_TUTORIAL);
+            }
             model.addTutorial(tutorialToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS_TUTORIAL, Messages.format(tutorialToAdd)));
         }
