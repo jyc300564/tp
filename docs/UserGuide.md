@@ -40,6 +40,10 @@ CoursePilot is a **desktop app for managing tutorial groups and students, optimi
 
 1. Refer to the [Features](#features) below for details of each command.
 
+**Tip:** If you are new, start by using `list -tutorial` followed by `select` before attempting student-related commands.
+This ensures commands like `add -student` and `list -student` work as expected.  
+Following this workflow can help avoid common errors.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -251,6 +255,8 @@ CoursePilot provides context-aware autocomplete suggestions as you type in the c
 * <kbd>Tab</kbd> : Accepts the first suggestion.
 * <kbd>Escape</kbd> : Dismisses the suggestion menu.
 * You can also click on any suggestion to select it.
+
+Autocomplete suggestions are updated dynamically as you type, helping to reduce input errors and improve efficiency.
 
 ### Saving the data
 
