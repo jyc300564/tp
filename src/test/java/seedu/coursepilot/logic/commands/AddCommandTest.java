@@ -215,8 +215,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isStudentInCurrentTutorial(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Optional<Tutorial> getCurrentOperatingTutorial() {
             return Optional.ofNullable(currentTutorial);
+        }
+
+        @Override
+        public Optional<Tutorial> getTutorialByCode(String tutorialCode) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -289,6 +299,11 @@ public class AddCommandTest {
         public boolean hasStudent(Student student) {
             requireNonNull(student);
             return studentsAdded.stream().anyMatch(student::isSameStudent);
+        }
+
+        @Override
+        public void updateFilteredStudentList(Predicate<Student> predicate) {
+
         }
 
         @Override

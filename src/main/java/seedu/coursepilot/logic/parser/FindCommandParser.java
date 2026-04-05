@@ -4,9 +4,7 @@ import static seedu.coursepilot.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.coursepilot.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT_FLAG;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
-import seedu.coursepilot.commons.core.LogsCenter;
 import seedu.coursepilot.logic.commands.FindCommand;
 import seedu.coursepilot.logic.parser.exceptions.ParseException;
 import seedu.coursepilot.model.student.EmailContainsKeywordsPredicate;
@@ -15,11 +13,9 @@ import seedu.coursepilot.model.student.NameContainsKeywordsPredicate;
 import seedu.coursepilot.model.student.PhoneStartsWithKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new {@code FindCommand} object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
-    private static final Logger logger = LogsCenter.getLogger(FindCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -33,37 +29,38 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-        assert nameKeywords.length > 0;
+        String[] tokens = trimmedArgs.split("\\s+");
+        assert tokens.length > 0;
 
-        if (nameKeywords[0].startsWith("/")) {
-            FindCommand.Flag flag = FindCommand.Flag.fromString(nameKeywords[0]);
+        if (tokens[0].startsWith("/")) {
+            FindCommand.Flag flag = FindCommand.Flag.fromString(tokens[0]);
             if (flag == null) {
                 throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT_FLAG, FindCommand.MESSAGE_USAGE_FLAG));
             }
 
-            if (nameKeywords.length < 2) {
+            if (tokens.length < 2) {
                 throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE_FLAG));
             }
 
+            String[] keywords = Arrays.copyOfRange(tokens, 1, tokens.length);
+
             switch (flag) {
             case PHONE:
-                return new FindCommand(new PhoneStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
+                return new FindCommand(new PhoneStartsWithKeywordsPredicate(Arrays.asList(keywords)));
             case EMAIL:
-                return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+                return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(keywords)));
             case MATRIC:
-                return new FindCommand(new MatricNumberStartsWithKeywordsPredicate(Arrays.asList(nameKeywords)));
+                return new FindCommand(new MatricNumberStartsWithKeywordsPredicate(Arrays.asList(keywords)));
             default:
                 // Default case only occurs if you added a flag into FindCommand.Flag but did not add the case here
                 // Otherwise, it should be impossible to reach here
                 // Typically, parser files do not have logging, but I am adding one here as it seems appropriate
-                logger.warning("Unhandled flag encountered in FindCommandParser: " + flag);
                 throw new AssertionError("Unhandled flag: " + flag);
             }
         }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(tokens)));
     }
 }

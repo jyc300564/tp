@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import seedu.coursepilot.commons.util.ToStringBuilder;
 import seedu.coursepilot.logic.Messages;
-import seedu.coursepilot.logic.commands.CommandResult.PanelSwitch;
 import seedu.coursepilot.logic.commands.exceptions.CommandException;
 import seedu.coursepilot.model.Model;
 import seedu.coursepilot.model.student.Student;
@@ -23,8 +22,11 @@ public class FindCommand extends Command {
      * Specifies the valid flags of FindCommand
      */
     public enum Flag {
+        /** Matches students by phone number prefix. */
         PHONE("/phone"),
+        /** Matches students by email substring. */
         EMAIL("/email"),
+        /** Matches students by matric number prefix. */
         MATRIC("/matric");
 
         private final String value;
@@ -78,12 +80,13 @@ public class FindCommand extends Command {
             + Flag.validFlagsString() + "\n"
             + "Example: " + COMMAND_WORD + " /email @u.nus.edu @gmail";
 
-    public static final String MESSAGE_SUCCESS_ALL_STUDENTS =
-        "No tutorial selected. Showing all matching students.";
-
     private final Predicate<Student> predicate;
 
+    /**
+     * Creates a FindCommand that filters students using the given {@code predicate}.
+     */
     public FindCommand(Predicate<Student> predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
@@ -97,14 +100,11 @@ public class FindCommand extends Command {
             assert model.getFilteredStudentList() != null;
             return new CommandResult(
                 String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
-                        model.getFilteredStudentList().size()), PanelSwitch.SHOW_STUDENT_LIST);
+                        model.getFilteredStudentList().size()));
         }
 
         model.updateFilteredStudentList(
-            student -> predicate.test(student)
-                    && model.getCurrentOperatingTutorial()
-                            .map(tutorial -> tutorial.hasStudent(student))
-                            .orElse(false));
+            student -> predicate.test(student) && model.isStudentInCurrentTutorial(student));
         assert model.getFilteredStudentList() != null;
         return new CommandResult(
                 String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));

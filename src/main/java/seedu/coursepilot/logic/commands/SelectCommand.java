@@ -1,14 +1,17 @@
 package seedu.coursepilot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.coursepilot.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.coursepilot.commons.util.ToStringBuilder;
+import seedu.coursepilot.logic.commands.exceptions.CommandException;
 import seedu.coursepilot.model.Model;
 import seedu.coursepilot.model.tutorial.Tutorial;
 
 /**
  * Selects a tutorial in CoursePilot, making it the current operating tutorial.
- * Keyword matching is case insensitive.
+ * Tutorial code matching is case-insensitive.
+ * Use {@code CLEAR_KEYWORD} as the argument to clear the current selection.
  */
 public class SelectCommand extends Command {
 
@@ -27,30 +30,34 @@ public class SelectCommand extends Command {
 
     private final String tutorialKeyword;
 
+    /**
+     * Creates a SelectCommand to select the tutorial with the given {@code tutorialKeyword}.
+     * Use {@code "none"} to clear the current operating tutorial.
+     */
     public SelectCommand(String tutorialKeyword) {
+        requireNonNull(tutorialKeyword);
         this.tutorialKeyword = tutorialKeyword;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (tutorialKeyword.equalsIgnoreCase(CLEAR_KEYWORD)) {
             model.clearCurrentOperatingTutorial();
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             return new CommandResult(MESSAGE_CLEAR_TUTORIAL);
         }
 
-        Tutorial tutorial = model.getFilteredTutorialList().stream()
-                .filter(tut -> tut.getTutorialCode().equalsIgnoreCase(tutorialKeyword))
-                .findFirst()
-                .orElse(null);
+        Tutorial tutorial = model.getTutorialByCode(tutorialKeyword).orElse(null);
 
         if (tutorial == null) {
-            return new CommandResult(
+            throw new CommandException(
                     String.format(MESSAGE_TUTORIAL_NOT_FOUND, tutorialKeyword));
         }
 
         model.setCurrentOperatingTutorial(tutorial);
+        model.updateFilteredStudentList(tutorial::hasStudent);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, tutorial.getTutorialCode()));
     }
@@ -64,7 +71,7 @@ public class SelectCommand extends Command {
             return false;
         }
         SelectCommand otherSelectCommand = (SelectCommand) other;
-        return tutorialKeyword.equals(otherSelectCommand.tutorialKeyword);
+        return tutorialKeyword.equalsIgnoreCase(otherSelectCommand.tutorialKeyword);
     }
 
     @Override
@@ -72,5 +79,10 @@ public class SelectCommand extends Command {
         return new ToStringBuilder(this)
                 .add("tutorialKeyword", tutorialKeyword)
                 .toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return tutorialKeyword.toLowerCase().hashCode();
     }
 }
