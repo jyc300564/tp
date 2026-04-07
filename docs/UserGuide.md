@@ -311,11 +311,7 @@ CoursePilot provides context-aware autocomplete suggestions as you type in the c
 * <kbd>Escape</kbd> : Dismisses the suggestion menu.
 * You can also click on any suggestion to select it.
 
-<<<<<<< HEAD
----
-=======
 Autocomplete suggestions are updated dynamically as you type, helping to reduce input errors and improve efficiency.
->>>>>>> dad3402b1cafadc2d1278104612764a8a0226de8
 
 ### Saving the data
 
