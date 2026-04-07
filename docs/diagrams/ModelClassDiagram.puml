@@ -14,11 +14,17 @@ Class UserPrefs
 
 Class UniqueStudentList
 Class Student
-Class Address
+Class MatricNumber
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class UniqueTutorialList
+Class Tutorial
+Class TutorialCode
+Class Day
+Class TimeSlot
+Class Capacity
 
 Class I #FFFFFF
 }
@@ -40,15 +46,24 @@ UniqueStudentList --> "~* all" Student
 Student *--> Name
 Student *--> Phone
 Student *--> Email
-Student *--> Address
+Student *--> MatricNumber
 Student *--> "*" Tag
 
 Student -[hidden]up--> I
 UniqueStudentList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> MatricNumber
+MatricNumber -[hidden]right-> Email
 
+CoursePilot *--> "1" UniqueTutorialList
+UniqueTutorialList --> "~* all" Tutorial
+Tutorial *--> TutorialCode
+Tutorial *--> Day
+Tutorial *--> TimeSlot
+Tutorial *--> Capacity
+Tutorial --> "*" Student
+
+ModelManager --> "~* filtered" Tutorial
 ModelManager --> "~* filtered" Student
 @enduml
