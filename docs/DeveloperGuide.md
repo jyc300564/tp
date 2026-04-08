@@ -590,29 +590,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
+**Use case: UC09 - Clear all data**
+**Use case: UC10 - Exit CoursePilot**
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-3.  A tutor with above average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A tutor who can type at least 60 words per minute should be able to accomplish most tasks faster using commands than using the mouse.
 4.  Data should be stored locally in a human-editable file format (e.g., JSON).
 5.  CoursePilot should not require a database management system (DBMS).
 6.  CoursePilot should not depend on any remote server.
 7.  CoursePilot should work without requiring an installer.
 8.  CoursePilot should be packaged into a single JAR file not exceeding 100MB.
 9.  The GUI should work well for standard screen resolutions of 1920x1080 and higher at 100% and 125% scaling, and should be usable at 1280x720 and higher at 150% scaling.
-10. CoursePilot should follow an object-oriented design.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Tutor/TA**: A teaching assistant at a university responsible for conducting tutorial sessions, marking attendance, and grading assessments
+* Tutor: A university instructor responsible for conducting tutorial sessions and managing student records. Includes Teaching Assistants (TAs) who perform similar responsibilities.
 * **Student Contact**: A stored entry in CoursePilot containing a student's information
 * **Tutorial Slot**: A tutorial object defined by a code, time, day, and capacity, created and managed by a tutor in CoursePilot
-* **Tutorial Resource**: A local file (e.g. PDF) detected by CoursePilot from the tutor's PC and imported into CoursePilot for easy access
 * **Assessment**: A graded component of a course such as an assignment, quiz, or exam
 * **Attendance**: A record of whether a student was present for a specific tutorial session
 * **CLI**: Command Line Interface, a text-based interface for interacting with CoursePilot
+* **Current Operating Tutorial**: The tutorial currently selected via the select command, which student-level commands operate on
+* **Matric Number**: A unique student identifier following the format Axxxxxx
+* **Type**: A flag (-student or -tutorial) that specifies which entity type a command operates on
+* **Prefix**: A field identifier starting with / used to specify parameters in commands (e.g. /name, /email)
 
 --------------------------------------------------------------------------------------------------------------------
 
