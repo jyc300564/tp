@@ -59,8 +59,6 @@ public class ListCommand extends Command {
 
         if (listTarget == ListTarget.TUTORIAL) {
             model.updateFilteredTutorialList(PREDICATE_SHOW_ALL_TUTORIALS);
-            model.clearCurrentOperatingTutorial();
-            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             return new CommandResult(MESSAGE_SUCCESS_TUTORIAL);
         }
 
