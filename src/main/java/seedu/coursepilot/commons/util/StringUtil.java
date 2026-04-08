@@ -53,14 +53,14 @@ public class StringUtil {
         requireNonNull(word);
         requireNonNull(substring);
 
-        String preppedSentence = word.trim();
+        String preppedWord = word.trim();
         String preppedSubstring = substring.trim();
-        checkArgument(!preppedSentence.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedSentence.split("\\s+").length == 1, "Word parameter should be a single word");
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
         checkArgument(!preppedSubstring.isEmpty(), "Substring parameter cannot be empty");
         checkArgument(preppedSubstring.split("\\s+").length == 1, "Substring parameter should be a single word");
 
-        return preppedSentence.toLowerCase().contains(preppedSubstring.toLowerCase());
+        return preppedWord.toLowerCase().contains(preppedSubstring.toLowerCase());
     }
 
     /**
