@@ -172,8 +172,8 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
-        @Test
-        public void execute_matricChanged_updatesTutorialStudentReference() {
+    @Test
+    public void execute_matricChanged_updatesTutorialStudentReference() {
         Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         String oldMatric = studentToEdit.getMatriculationNumber().toString();
         String newMatric = "A100000";
@@ -195,7 +195,7 @@ public class EditCommandTest {
             .anyMatch(student -> student.getMatriculationNumber().toString().equals(oldMatric)));
         assertTrue(tutorial.getStudents().stream()
             .anyMatch(student -> student.getMatriculationNumber().toString().equals(newMatric)));
-        }
+    }
 
     @Test
     public void equals() {
