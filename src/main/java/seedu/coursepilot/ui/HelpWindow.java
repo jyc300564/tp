@@ -26,14 +26,9 @@ public class HelpWindow extends UiPart<Stage> {
             "",
             "MANAGING TUTORIALS",
             "  add -tutorial /code CODE /day DAY /timeslot TIMESLOT /capacity CAP",
-            "    e.g. add -tutorial /code CS2103T-W12 /day Wed /timeslot 10am-11am /capacity 10",
-            "  delete -tutorial INDEX      Delete tutorial at INDEX in the list",
-            "",
-            "MANAGING STUDENTS (requires a tutorial to be selected first)",
             "  add -student /name NAME /phone PHONE /email EMAIL /matric MATRIC [/tag TAG]...",
-            "    e.g. add -student /name John Doe /phone 98765432 /email johnd@example.com /matric A000000",
             "  edit INDEX [/name NAME] [/phone PHONE] [/email EMAIL] [/matric MATRIC] [/tag TAG]...",
-            "    e.g. edit 1 /phone 91234567 /email johndoe@example.com",
+            "  delete -tutorial INDEX      Delete tutorial at INDEX in the list",
             "  delete -student INDEX       Delete student at INDEX from the tutorial",
             "",
             "FINDING STUDENTS",
@@ -41,15 +36,13 @@ public class HelpWindow extends UiPart<Stage> {
             "  find /phone KEYWORD         Search by phone number prefix",
             "  find /email KEYWORD         Search by email (case-insensitive)",
             "  find /matric KEYWORD        Search by matric number prefix",
-            "",
-            "OTHER COMMANDS",
             "  clear                       Delete all students and tutorials",
             "  help                        Show this help window",
             "  exit                        Exit the application",
             "",
             "TIPS",
             "  - Parameters can be in any order",
-            "  - Use Tab to accept autocomplete suggestions, Esc to dismiss"
+            "  - Use TAB or ENTER to accept autocomplete suggestions, ESC to dismiss"
     );
 
             @Deprecated
@@ -75,7 +68,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
-        commandReference.setText(COMMAND_REFERENCE);
+        commandReference.setText(COMMAND_SUMMARY);
     }
 
     /**
