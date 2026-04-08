@@ -15,6 +15,9 @@ Class StudentListPanel
 Class StudentCard
 Class StatusBarFooter
 Class CommandBox
+Class TutorialCodeListPanel
+Class TutorialDetailsPanel
+Class CommandAutoCompleter
 }
 
 package Model <<Rectangle>> {
@@ -35,6 +38,8 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" StudentListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" TutorialCodeListPanel
+MainWindow *-down-> "1" TutorialDetailsPanel
 
 StudentListPanel -down-> "*" StudentCard
 
@@ -46,8 +51,11 @@ StudentListPanel --|> UiPart
 StudentCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+TutorialCodeListPanel --|> UiPart
+TutorialDetailsPanel --|> UiPart
 
 StudentCard ..> Model
+CommandBox ..> CommandAutoCompleter
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

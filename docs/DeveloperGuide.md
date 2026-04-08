@@ -268,8 +268,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Who can type fast and prefers typing to mouse interactions
 * Who is reasonably comfortable using CLI apps
 
-**Value proposition**: a single hub that reduces teaching admin overhead by keeping student group organization, 
-grading progress, and participation records in one place, so TAs can run sessions consistently and grade faster than using web-based tools like Canvas
+**Value proposition**: A lightweight, CLI-first desktop tool that gives Tutors and TAs a single hub to organize student groups and contacts across multiple tutorial slots, replacing scattered documents with fast, offline lookup and management, so sessions run consistently and administration overhead stays low
 
 
 ### User stories
