@@ -30,25 +30,33 @@ CoursePilotParser -> DeleteCommandParser : parse("-student 1")
 activate DeleteCommandParser
 
 create DeleteCommand
-DeleteCommandParser -> DeleteCommand : DeleteCommand("student", index)
+DeleteCommandParser -> DeleteCommand
 activate DeleteCommand
 DeleteCommand --> DeleteCommandParser
 deactivate DeleteCommand
 
-DeleteCommandParser --> CoursePilotParser
+DeleteCommandParser --> CoursePilotParser : d
 deactivate DeleteCommandParser
+DeleteCommandParser -[hidden]-> CoursePilotParser
 destroy DeleteCommandParser
 
-CoursePilotParser --> LogicManager
+CoursePilotParser --> LogicManager : d
 deactivate CoursePilotParser
 
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deleteStudent(studentToDelete)
+DeleteCommand -> Model : removeStudentFromCurrentTutorial(1)
 activate Model
 Model --> DeleteCommand
 deactivate Model
+
+alt student not in other tutorials
+    DeleteCommand -> Model : deleteStudent(studentToDelete)
+    activate Model
+    Model --> DeleteCommand
+    deactivate Model
+end
 
 create CommandResult
 DeleteCommand -> CommandResult
@@ -59,6 +67,6 @@ deactivate CommandResult
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
 
-[<--LogicManager
+[<-- LogicManager
 deactivate LogicManager
 @enduml

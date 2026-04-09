@@ -6,7 +6,6 @@ Actor User as user USER_COLOR
 Participant ":UI" as ui UI_COLOR
 Participant ":Logic" as logic LOGIC_COLOR
 Participant ":Model" as model MODEL_COLOR
-Participant "currentTutorial:Tutorial" as tutorial MODEL_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
 
 user -[USER_COLOR]> ui : "delete -student 1"
@@ -15,18 +14,13 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("delete -student 1")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : getCurrentOperatingTutorial()
+logic -[LOGIC_COLOR]> model : removeStudentFromTutorial(student)
 activate model MODEL_COLOR
 model --[MODEL_COLOR]> logic
 deactivate model
 
-logic -[LOGIC_COLOR]> tutorial : removeStudent(studentToDelete)
-activate tutorial MODEL_COLOR
-tutorial --[MODEL_COLOR]> logic
-deactivate tutorial
-
-alt !inOtherTutorial
-    logic -[LOGIC_COLOR]> model : deleteStudent(studentToDelete)
+alt student not in other tutorials
+    logic -[LOGIC_COLOR]> model : deleteStudent(student)
     activate model MODEL_COLOR
     model --[MODEL_COLOR]> logic
     deactivate model
@@ -44,6 +38,6 @@ deactivate storage
 logic --[LOGIC_COLOR]> ui
 deactivate logic
 
-ui--[UI_COLOR]> user
+ui --[UI_COLOR]> user
 deactivate ui
 @enduml

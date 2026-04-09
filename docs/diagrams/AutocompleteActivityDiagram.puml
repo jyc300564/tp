@@ -13,7 +13,7 @@ else ([else])
     else ([else])
         if () then ([valid command word])
             :Get suggestions for command;
-            note right: Fork: See detailed sub-diagram
+            note right: Fork: See AutocompleteCommandActivityDiagram
         else ([else])
             :Returns empty list;
         endif
