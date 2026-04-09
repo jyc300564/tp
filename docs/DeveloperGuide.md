@@ -321,46 +321,46 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | Role  | Feature                                                  | Benefit |
-|----------|-------|----------------------------------------------------------|---|
-| * * *    | Tutor | Ask for help when using CoursePilot                      | I can refer to instructions when I forget how to use CoursePilot |
-| * * *    | Tutor | Add a student to CoursePilot                             | I can keep track of all my students in one place |
-| * * *    | Tutor | Delete a student from CoursePilot                        | I can remove students who are no longer relevant |
-| * * *    | Tutor | List all student contacts                                | I can quickly view all students stored in CoursePilot |
-| * * *    | Tutor | Edit existing student contact                            | I can keep student information accurate and up to date |
-| * * *    | Tutor | Find a student contact                                   | I can quickly find a specific student's information |
-| * * *    | Tutor | Clear all existing student contacts                      | I can reset the system when the data is no longer needed |
-| * * *    | Tutor | Exit CoursePilot                                         | I can safely close the application after use |
-| * * *    | Tutor | Archive CoursePilot data                                 | I do not have to repopulate all my data again |
-| * * *    | Tutor | List all tutorial slots                                  | I can check all the tutorials I am in charge of |
-| * * *    | Tutor | List all tutorial slots detail                           | I can check all the details of the tutorials I am in charge of |
-| * * *    | Tutor | Select a tutorial slots                                  | I can choose a tutorial slot to operate on |
-| * * *    | Tutor | Assign students to certain tutorial slots                | I can organize students into the correct tutorials |
-| * * *    | Tutor | Add a tutorial slot                                      | I can create a new tutorial slot with a code, time, day and capacity |
-| * * *    | Tutor | Delete a tutorial slot                                   | I can remove tutorial slots that are no longer needed |
-| * *      | Tutor | Edit tutorial slots                                      | I can update tutorial arrangements |
-| * *      | Tutor | View which students are assigned to which tutorial slots | I can understand the distribution of students across tutorials |
-| * *      | Tutor | Mark student attendance                                  | I can record who attended each tutorial |
-| * *      | Tutor | Unmark student attendance                                | I can correct attendance records if mistakes occur |
-| * *      | Tutor | Track participation of each student                      | I can monitor student participation over time per tutorial slot |
-| * *      | Tutor | Filter available tutorial slots                          | I can easily find tutorial slots that match my conditions |
-| * *      | Tutor | Provide feedback to students                             | I can help students improve their learning |
-| * *      | Tutor | Add deadlines                                            | I can remind myself of important dates |
-| * *      | Tutor | Delete deadlines                                         | I can remove deadlines that are no longer relevant |
-| * *      | Tutor | Edit deadlines                                           | I can update deadlines if schedules change |
-| * *      | Tutor | Be reminded of deadlines                                 | I do not miss any important deadlines |
-| *        | Tutor | Add assessments                                          | I can manage student evaluations and grading components |
-| *        | Tutor | Delete assessments                                       | I can remove assessments that are no longer required |
-| *        | Tutor | Edit assessments                                         | I can update assessment details when necessary |
-| *        | Tutor | Grade assessments                                        | I can evaluate student performance |
-| *        | Tutor | Track assessments                                        | I can monitor students' assessments and results |
-| *        | Tutor | Comment on student's work                                | I can provide constructive feedback to improve their learning |
-| *        | Tutor | Add tutorial resources                                   | I can share useful materials with students |
-| *        | Tutor | Delete tutorial resources                                | I can remove outdated or unnecessary materials |
-| *        | Tutor | Edit tutorial resources                                  | I can replace or reupload outdated materials |
-| *        | Tutor | Create groups                                            | I can organize students for collaborative activities |
-| *        | Tutor | Send student private message                             | I can communicate directly with a specific student |
-| *        | Tutor | Send student group message                               | I can communicate important information to multiple students at once |
+| Priority | As a ...  | I want to ...                                            | So that I can ... |
+|----------|-----------|----------------------------------------------------------|-------------------|
+| * * *    | New tutor using CoursePilot for the first time | Ask for help when using CoursePilot | I can refer to instructions when I forget how to use CoursePilot |
+| * * *    | Tutor     | Add a student to CoursePilot                             | I can keep track of all my students in one place |
+| * * *    | Tutor     | Delete a student from CoursePilot                        | I can remove students who are no longer relevant |
+| * * *    | Tutor managing multiple students | List all student contacts         | I can quickly view all students stored in CoursePilot |
+| * * *    | Tutor     | Edit existing student contact                            | I can keep student information accurate and up to date |
+| * * *    | Tutor managing a large tutorial group | Find a student contact       | I can quickly find a specific student's information |
+| * * *    | Tutor     | Clear all existing student contacts                      | I can reset the system when the data is no longer needed |
+| * * *    | Tutor     | Exit CoursePilot                                         | I can safely close the application after use |
+| * * *    | Tutor     | Archive CoursePilot data                                 | I do not have to repopulate all my data again |
+| * * *    | Tutor managing multiple tutorials | List all tutorial slots          | I can check all the tutorials I am in charge of |
+| * * *    | Tutor managing multiple tutorials | List all tutorial slots detail   | I can check all the details of the tutorials I am in charge of |
+| * * *    | Tutor managing multiple tutorials | Select a tutorial slots          | I can choose a tutorial slot to operate on |
+| * * *    | Tutor     | Assign students to certain tutorial slots                | I can organize students into the correct tutorials |
+| * * *    | Tutor     | Add a tutorial slot                                      | I can create a new tutorial slot with a code, time, day and capacity |
+| * * *    | Tutor     | Delete a tutorial slot                                   | I can remove tutorial slots that are no longer needed |
+| * *      | Tutor managing multiple tutorials | Edit tutorial slots              | I can update tutorial arrangements |
+| * *      | Tutor managing multiple tutorials | View which students are assigned to which tutorial slots | I can understand the distribution of students across tutorials |
+| * *      | Tutor     | Mark student attendance                                  | I can record who attended each tutorial |
+| * *      | Tutor     | Unmark student attendance                                | I can correct attendance records if mistakes occur |
+| * *      | Tutor     | Track participation of each student                      | I can monitor student participation over time per tutorial slot |
+| * *      | Tutor managing multiple tutorials | Filter available tutorial slots  | I can easily find tutorial slots that match my conditions |
+| * *      | Tutor     | Provide feedback to students                             | I can help students improve their learning |
+| * *      | Tutor with upcoming deadlines | Add deadlines                        | I can remind myself of important dates |
+| * *      | Tutor with upcoming deadlines | Delete deadlines                     | I can remove deadlines that are no longer relevant |
+| * *      | Tutor with upcoming deadlines | Edit deadlines                       | I can update deadlines if schedules change |
+| * *      | Tutor with upcoming deadlines | Be reminded of deadlines             | I do not miss any important deadlines |
+| *        | Tutor     | Add assessments                                          | I can manage student evaluations and grading components |
+| *        | Tutor     | Delete assessments                                       | I can remove assessments that are no longer required |
+| *        | Tutor     | Edit assessments                                         | I can update assessment details when necessary |
+| *        | Tutor     | Grade assessments                                        | I can evaluate student performance |
+| *        | Tutor     | Track assessments                                        | I can monitor students' assessments and results |
+| *        | Tutor     | Comment on student's work                                | I can provide constructive feedback to improve their learning |
+| *        | Tutor     | Add tutorial resources                                   | I can share useful materials with students |
+| *        | Tutor     | Delete tutorial resources                                | I can remove outdated or unnecessary materials |
+| *        | Tutor     | Edit tutorial resources                                  | I can replace or reupload outdated materials |
+| *        | Tutor     | Create groups                                            | I can organize students for collaborative activities |
+| *        | Tutor     | Send student private message                             | I can communicate directly with a specific student |
+| *        | Tutor     | Send student group message                               | I can communicate important information to multiple students at once |
 
 ### Use cases
 
@@ -374,100 +374,93 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  CoursePilot opens a separate help window containing a link to the user guide and a summary of commands.
 
     Use case ends.
-  
-**Extensions**
 
-* 1a. The help window is already open.
-
-    * 1a1. CoursePilot brings the existing help window to the front.
-
-      Use case ends.
-
-**Use case: UC02 - Add a student**
+**Use case: UC02 - Select a tutorial**
 
 **MSS**
 
-1.  Tutor requests to add a student by providing the required details (Name, Phone Number, Email, Matriculation Number).
-2.  CoursePilot verifies that a tutorial is currently selected.
-3.  CoursePilot validates that the phone number and email are not already in use by another student in the system.
-4.  CoursePilot checks that the student is not already enrolled in the current tutorial.
-5.  CoursePilot verifies that the current tutorial has not reached maximum capacity.
-6.  CoursePilot creates the student record in the global list.
-7.  CoursePilot assigns the student to the selected tutorial.
-8.  CoursePilot updates the display to show the student in the tutorial list and shows a success message.
+1. Tutor requests to select a tutorial by providing a tutorial code.
+2. CoursePilot finds the matching tutorial.
+3. CoursePilot sets the tutorial as the current operating tutorial.
+4. CoursePilot updates the student list to show only students in the selected tutorial and shows a success message.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. No tutorial is currently selected.
-    * 2a1. CoursePilot shows an error message indicating a tutorial must first be selected
+* 1a. The provided tutorial code does not match any existing tutorial.
+    * 1a1. CoursePilot shows an error message and the current operating tutorial remains unchanged.
 
       Use case ends.
 
-* 3a. Phone number or Email is already used by a different student entry.
-    * 3a1. CoursePilot shows an error message indicating a duplicate contact detail.
+* 1b. Tutor uses `select none` instead of providing a tutorial code.
+    * 1b1. CoursePilot clears the current operating tutorial.
+    * 1b2. CoursePilot updates the student list to show all students in the system.
 
       Use case ends.
 
-* 4a. The student is already enrolled in the selected tutorial.
-    * 4a1. CoursePilot shows an error message indicating a duplicate student in the tutorial.
-
-      Use case ends.
-
-* 5a. The selected tutorial is at full capacity.
-    * 5a1. CoursePilot shows an error message: "Tutorial is at full capacity."
-
-      Use case ends.
-  
-* 6a. The student record already exists in the global student list (but not in this tutorial).
-    * 6a1. CoursePilot skips creating a new student record and uses the existing one.
-
-      Use case resumes from step 7.
-
-**Use case: UC03 - Delete a student**
+**Use case: UC03 - Add a student**
 
 **MSS**
 
-1.  Tutor requests to delete a specific student by their index in the displayed list.
-2.  CoursePilot verifies that a tutorial is currently selected.
-3.  CoursePilot identifies the student at the specified index within that tutorial.
-4.  CoursePilot removes the student from the current tutorial.
-5.  CoursePilot checks if the student is enrolled in any other tutorials.
-6.  CoursePilot deletes the student from the global system if they are not found in any other tutorial.
-7.  CoursePilot updates the display and shows a confirmation message.
+1. Tutor selects a tutorial (UC02).
+2. Tutor requests to add a student by providing the required details (Name, Phone Number, Email, Matriculation Number).
+3. CoursePilot validates the provided details.
+4. CoursePilot adds the student to the selected tutorial and shows a success message.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid (out of bounds or non-numeric).
-    * 1a1. CoursePilot shows an error message indicating an invalid index.
+* 2a. Required fields are missing or the format is invalid.
+    * 2a1. CoursePilot shows an error message indicating the invalid or missing fields.
 
       Use case ends.
 
-* 2a. No tutorial is currently selected (No "Operating Tutorial").
-    * 2a1. CoursePilot shows an error message indicating a tutorial must first be selected
+* 3a. The phone number or email is already in use by another student.
+    * 3a1. CoursePilot shows an error message indicating duplicate contact details.
 
       Use case ends.
 
-* 6a. The student exists in at least one other tutorial.
-    * 6a1. CoursePilot retains the student in the global list and only removes the association with the current tutorial.
+* 3b. The student is already enrolled in the selected tutorial.
+    * 3b1. CoursePilot shows an error message indicating a duplicate student.
 
-      Use case resumes at step 7.
+      Use case ends.
 
-**Use case: UC04 - Edit a student**
+* 3c. The selected tutorial is at full capacity.
+    * 3c1. CoursePilot shows an error message indicating the tutorial is full.
+
+      Use case ends.
+
+**Use case: UC04 - Delete a student**
 
 **MSS**
 
-1.  Tutor request to edit a student's details (e.g., Name, Phone, Email, Matriculation Number) by providing the index in the displayed list.
-2.  CoursePilot identifies the student at the specified index.
-3.  CoursePilot validates that the new details do not conflict with existing students (Matriculation Number, Phone, or Email).
-4.  CoursePilot updates the student's details in the global list.
-5.  CoursePilot propagates the changes to all tutorials the student is currently enrolled in.
-6.  CoursePilot updates the display and shows a confirmation message.
+1. Tutor selects a tutorial (UC02).
+2. Tutor requests to delete a student by specifying the index in the displayed student list.
+3. CoursePilot removes the student from the current tutorial.
+4. CoursePilot removes the student from the global student list if they are not enrolled in any other tutorial.
+5. CoursePilot updates the display and shows a confirmation message.
 
-    Use case ends.
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. CoursePilot shows an error message indicating an invalid index.
+
+      Use case ends.
+
+**Use case: UC05 - Edit a student**
+
+**MSS**
+
+1. Tutor requests to edit a student by specifying the index in the displayed list and the fields to update.
+2. CoursePilot validates the new details.
+3. CoursePilot updates the student's details across all tutorials they are enrolled in and updates the global student list.
+4. CoursePilot updates the display and shows a confirmation message.
+
+   Use case ends.
 
 **Extensions**
 
@@ -477,147 +470,159 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 1b. No fields to edit are provided.
-    * 1b1. CoursePilot shows an error message indicating at least one field to edit must be provided.
+    * 1b1. CoursePilot shows an error message indicating at least one field must be provided.
 
       Use case ends.
 
-* 3a. Duplicate details detected.
-    * 3a1. CoursePilot shows an error message indicating duplicate details.
+* 2a. The new details conflict with an existing student (duplicate matric number, phone, or email).
+    * 2a1. CoursePilot shows an error message indicating duplicate details.
 
       Use case ends.
 
-**Use case: UC05 - Add a tutorial**
+**Use case: UC06 - Add a tutorial**
 
 **MSS**
 
-1.  Tutor requests to add a tutorial by providing the required details (Tutorial Code, Day, TimeSlot, and Capacity).
-2.  CoursePilot validates the provided details for format and data constraints.
-3.  CoursePilot checks that the tutorial code does not already exist in the system.
-4.  CoursePilot creates the new tutorial with the specified details and adds it to the global tutorial list.
-5.  CoursePilot updates the tutorial list display and shows a success message.
+1. Tutor requests to add a tutorial by providing the required details (Tutorial Code, Day, TimeSlot, Capacity).
+2. CoursePilot validates the provided details.
+3. CoursePilot adds the tutorial to the system and shows a success message.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. Required details (Mode, Code, Day, Time, or Capacity) are missing or the format is invalid.
-    * 1a1. CoursePilot shows an error message indicating the error.
-
-      Use case resumes from step 1.
-
-* 3a. A tutorial with the same tutorial code already exists.
-    * 3a1. CoursePilot shows an error message indicating this tutorial code already exists in CoursePilot.
+* 1a. Required fields are missing or the format is invalid.
+    * 1a1. CoursePilot shows an error message indicating the invalid or missing fields.
 
       Use case ends.
 
-**Use case: UC06 - Delete a tutorial**
-
-**MSS**
-
-1.  Tutor requests to delete a specific tutorial by its index in the displayed list.
-2.  CoursePilot identifies the tutorial at the specified index.
-3.  CoursePilot checks all students currently assigned to that tutorial.
-4.  CoursePilot deletes any student from the global system if that student is not enrolled in any other tutorial.
-5.  CoursePilot removes the tutorial from the system.
-6.  CoursePilot updates the display and shows a confirmation message.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given index is invalid (out of bounds or non-numeric).
-    * 1a1. CoursePilot shows an error message indicating an invalid tutorial index.
+* 2a. A tutorial with the same code already exists.
+    * 2a1. CoursePilot shows an error message indicating a duplicate tutorial code.
 
       Use case ends.
 
-* 4a. A student in the deleted tutorial is also enrolled in another tutorial.
-    * 4a1. CoursePilot retains the student in the global system and other tutorials.
-
-      Use case resumes at step 5.
-
-* 5a. The tutorial being deleted is the "Current Operating Tutorial".
-    * 5a1. CoursePilot clears the Operating Tutorial selection.
-    * 5a2. CoursePilot resets the student list display to show all students globally.
-
-      Use case resumes at step 6.
-
-**Use case: UC07 - List command**
+**Use case: UC07 - Delete a tutorial**
 
 **MSS**
 
-1.  Tutor requests to list students using the `-student` mode.
-2.  CoursePilot checks if a tutorial is currently selected (Current Operating Tutorial).
-3.  CoursePilot filters the student list to show only students belonging to the selected tutorial.
-4.  CoursePilot updates the display and shows the confirmation message indicating all students in the current tutorial are listed.
+1. Tutor requests to delete a tutorial by specifying its index in the displayed tutorial list.
+2. CoursePilot removes the tutorial from the system.
+3. CoursePilot removes the tutorial from all students enrolled in it.
+4. CoursePilot removes any student from the global system who is no longer enrolled in any remaining tutorial.
+5. CoursePilot updates the display and shows a confirmation message.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. Tutor requests to list tutorials instead (using `-tutorial` mode).
-    * 1a1. CoursePilot displays all registered tutorial groups.
-    * 1a2. CoursePilot shows the confirmation message indicating all tutorial details are listed."
+* 1a. The given index is invalid.
+    * 1a1. CoursePilot shows an error message indicating an invalid index.
+
+      Use case ends.
+
+* 2a. The tutorial removed is the current operating tutorial.
+    * 2a1. CoursePilot clears the Operating Tutorial selection.
+    * 2a2. CoursePilot resets the student list display to show all students globally.
+
+      Use case resumes at step 3.
+
+**Use case: UC08 - List students or tutorials**
+
+**MSS**
+
+1. Tutor selects a tutorial (UC02).
+2. Tutor requests to list students using the `-student` mode.
+3. CoursePilot displays all students enrolled in the current operating tutorial and shows a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Tutor requests to list tutorials instead using `-tutorial` mode.
+    * 1a1. CoursePilot displays all registered tutorials and their details.
 
       Use case ends.
 
 * 2a. No tutorial is currently selected.
-    * 2a1. CoursePilot updates the display to show all students in the global database.
-    * 2a2. CoursePilot shows the confirmation message indicating all students are listed.
+    * 2a1. CoursePilot displays all students in the global system and shows a confirmation message.
 
       Use case ends.
 
-**Use case: UC08 - Find student contact**
+**Use case: UC09 - Find students**
 
 **MSS**
 
-1.  Tutor requests to find students by entering keywords and an optional search prefix (e.g., `/phone`, `/email`, `/matric`).
-2.  CoursePilot confirms a tutorial is currently selected.
-3.  CoursePilot filters the student list to show students matching the keywords within the determined scope.
-4.  CoursePilot displays the number of matching students and updates the student list.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The tutor provides an invalid prefix.
-    * 1a1. CoursePilot shows an error message listing valid flags: `/phone, /email, /matric`.
+1. Tutor selects a tutorial (UC02).
+2. Tutor requests to find students by entering a field `Prefix` flag (`/phone`, `/email`, `/matric`) first.
+3. Tutor requests to find students by entering one or more keywords.
+4. CoursePilot filters and displays students in the current operating tutorial whose names match any of the keywords.
+5. CoursePilot shows the matching students and the total number of them found.
 
       Use case ends.
 
-* 2a. No tutorial is currently selected.
-    * 2a1. CoursePilot changes search scope to the entire global student database.
-    * 2a2. CoursePilot updates the display to show all matching students system-wide.
+**Extensions**
 
+* 2a. Tutor provides no `Prefix` flag.
+    * 2a1. CoursePilot defaults to filtering students by name.
+    
       Use case resumes from step 3.
 
-**Use case: UC09 - Clear all data**
-**Use case: UC10 - Exit CoursePilot**
+* 2b. Tutor provides an invalid prefix.
+    * 2b1. CoursePilot shows an error message listing the valid prefixes.
+
+      Use case ends.
+
+* 3a. No tutorial is currently selected.
+    * 3a1. CoursePilot searches across all students in the global system instead.
+    * 3a2. CoursePilot filters and displays students in the global student list whose names match any of the keywords.
+
+      Use case resumes from step 4.
+
+* 3b. No keywords are provided.
+    * 3b1. CoursePilot shows an error message indicating keywords must be provided.
+
+      Use case ends.
+
+**Use case: UC10 - Clear all data**
+
+**MSS**
+
+1. Tutor requests to clear all data.
+2. CoursePilot removes all students and tutorials from the system.
+3. CoursePilot updates the display and shows a confirmation message.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-3. A tutor who can type at least 60 words per minute should be able to accomplish most tasks faster using commands than using the mouse.
-4.  Data should be stored locally in a human-editable file format (e.g., JSON).
-5.  CoursePilot should not require a database management system (DBMS).
-6.  CoursePilot should not depend on any remote server.
-7.  CoursePilot should work without requiring an installer.
-8.  CoursePilot should be packaged into a single JAR file not exceeding 100MB.
-9.  The GUI should work well for standard screen resolutions of 1920x1080 and higher at 100% and 125% scaling, and should be usable at 1280x720 and higher at 150% scaling.
+2.  Should work without requiring an installer.
+3.  Should be packaged into a single JAR file not exceeding 100MB.
+4.  Should not depend on any remote server.
+5.  Should not require a Database Management System (DBMS).
+6.  Should return search results within 2 second for 1000 stored students and 100 tutorial slots.
+7.  All commands should execute and display results within 2 seconds for typical data sizes.
+8.  Should launch and be ready to accept commands within 3 seconds under typical conditions.
+9.  Data should be stored locally in a human-editable file format (e.g., JSON).
+10. Should not lose any stored data when the application is closed normally via the `exit` commmand, and should persist data between sessions.
+11. Existing data should remain intact even if a command fails due to invalid input.
+12.  The GUI should work well for standard screen resolutions of 1920x1080 and higher at 100% and 125% scaling, and should be usable at 1280x720 and higher at 150% scaling.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* Tutor: A university instructor responsible for conducting tutorial sessions and managing student records. Includes Teaching Assistants (TAs) who perform similar responsibilities.
+* **GUI**: Graphical User Interface; the visual display of CoursePilot that shows tutorials, students, and command results.
+* **CLI**: Command Line Interface; a text-based interface for interacting with CoursePilot
+* **Tutor**: A university instructor or Teaching Assistant (TA) responsible for conducting tutorial sessions and managing student records.
 * **Student Contact**: A stored entry in CoursePilot containing a student's information
 * **Tutorial Slot**: A tutorial object defined by a code, time, day, and capacity, created and managed by a tutor in CoursePilot
-* **Assessment**: A graded component of a course such as an assignment, quiz, or exam
-* **Attendance**: A record of whether a student was present for a specific tutorial session
-* **CLI**: Command Line Interface, a text-based interface for interacting with CoursePilot
-* **Current Operating Tutorial**: The tutorial currently selected via the select command, which student-level commands operate on
-* **Matric Number**: A unique student identifier following the format Axxxxxx
-* **Type**: A flag (-student or -tutorial) that specifies which entity type a command operates on
-* **Prefix**: A field identifier starting with / used to specify parameters in commands (e.g. /name, /email)
+* **Current Operating Tutorial**: The tutorial currently selected via the `select` command, which student-level commands operate on
+* **Matric Number**: A unique student identifier following the format Axxxxxx.
+* **Type**: A flag (`-student` or `-tutorial`) that specifies which entity type a command operates on
+* **Prefix**: A field identifier starting with `/` used to specify parameters in commands (e.g. /name, /email)
+* **Index**: A temporary 1-based position number shown in a displayed list, used to reference a specific student or tutorial in commands.
+* **MSS**: Main Success Scenario; the most straightforward interaction for a given use case, assuming nothing goes wrong.
+* **Global Student List**: The complete list of all students stored in CoursePilot across all tutorials.
 
 --------------------------------------------------------------------------------------------------------------------
 
