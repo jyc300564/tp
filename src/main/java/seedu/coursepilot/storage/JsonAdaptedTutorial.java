@@ -21,6 +21,8 @@ import seedu.coursepilot.model.tutorial.TutorialCode;
 class JsonAdaptedTutorial {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial's %s field is missing!";
+    public static final String MESSAGE_TUTORIAL_EXCEEDS_CAPACITY =
+            "Tutorial contains more students than its declared capacity.";
 
     private final String tutorialCode;
     private final String day;
@@ -98,10 +100,8 @@ class JsonAdaptedTutorial {
             modelStudents.add(jsonStudent.toModelType());
         }
 
-        if (modelStudents.size() > modelCapacity.value) {
-            throw new IllegalValueException(
-                    "Tutorial '" + tutorialCode + "' has more students ("
-                            + modelStudents.size() + ") than its capacity (" + modelCapacity.value + ").");
+        if (modelStudents.size() > modelCapacity.getValue()) {
+            throw new IllegalValueException(MESSAGE_TUTORIAL_EXCEEDS_CAPACITY);
         }
 
         Tutorial tutorial = new Tutorial(modelTutorialCode, modelDay, modelTimeSlot, modelCapacity);
